@@ -1,12 +1,18 @@
-.btn
+a.btn
 {
   padding: $base-spacing $s-spacing;
   border-radius: $base-spacing+$s-spacing*2;
   text-decoration: none;
   box-sizing: border-box;
   display: inline-block;
+  transition: background-color 200ms,color 200ms;
   &-primary {
     background-color: $color-yellow;
     color: $color-black;
+    &:hover{
+      color: $color-yellow;
+      background-color: $color-black;
+      text-decoration: none;
+    }
   }
 }

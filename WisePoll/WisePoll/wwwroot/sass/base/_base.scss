@@ -1,11 +1,25 @@
+body{
+  color: $color-black;
+}
+
 h1{
   font-size: $l-text-size;
+  line-height: 57px;
   font-weight: 700;
+  margin-bottom: $s-spacing;
 }
 
 h2{
   font-size: $m-text-size;
   font-weight: 600;
+}
+
+p{
+  line-height: 19.5px;
+}
+
+section h1, section h2{
+ text-align: center;  
 }
 
 .subtitle{
@@ -19,8 +33,17 @@ h2{
 a{
   text-decoration: none;
   font-weight: 600;
+  &:hover{
+    color: $color-purple;
+    text-decoration: none;
+  }
 }
 
 img{
   max-width: 100%;
+}
+
+section{
+  margin-top: $l-spacing;
+  margin-bottom: $l-spacing;
 }
