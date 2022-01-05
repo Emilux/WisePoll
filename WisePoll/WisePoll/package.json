@@ -6,10 +6,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build:css": "sass wwwroot/sass/app.scss wwwroot/css/style.css --style compressed",
-    "watch:css": "sass --watch wwwroot/sass/app.scss wwwroot/css/style.css"
+    "build:css": "sass wwwroot/sass/app.scss wwwroot/css/style.css --style compressed && npm run prefix",
+    "watch:css": "sass --watch wwwroot/sass/app.scss wwwroot/css/style.css",
+    "prefix": "postcss wwwroot/css/style.css --use autoprefixer -d wwwroot/css/"
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "browserslist": ["last 4 versions"],
+  "dependencies": {
+    "autoprefixer": "^10.4.1",
+    "postcss": "^8.4.5",
+    "postcss-cli": "^9.1.0"
+  }
 }

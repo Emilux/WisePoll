@@ -1,44 +1,55 @@
-.form {
-  &-group{
-    margin-top: $s-spacing ;
-  }
-  &-check{
-    margin-top: $s-spacing ;
-    display: flex;
-    align-items: center;
-  }
-  &-label{
-    margin-bottom: $base-spacing;
-    display: inline-block;
-    &-check{
-      display:block;
-    }
-  }
-  &-field{
-    display: block;
-    padding: $base-spacing;
-    border: 1px solid $color-clear-grey;
-    box-shadow: $s-shadow;
-    width: 100%;
-    box-sizing: border-box;
-    &[type=checkbox] {
-      width: auto;
-      appearance: none;
-      border-radius: 0;
-      position: relative;
-      margin: 0;
-      margin-right: $base-spacing;
-      &:checked:before{
-        content: "";
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        background-color: $color-yellow;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        box-shadow: $inner-shadow;
+form{
+  .form {
+    &-group{
+      margin-top: $s-spacing ;
+      &:first-of-type{
+        margin-top: 0;
       }
     }
-  }
+    &-check{
+      margin-top: $s-spacing ;
+      display: flex;
+      align-items: center;
+    }
+    &-label{
+      margin-bottom: $base-spacing;
+      display: inline-block;
+      &-check{
+        display:block;
+        margin-bottom: 0;
+      }
+      &:is(div){
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    &-field{
+      display: block;
+      padding: $base-spacing;
+      border: 1px solid $color-clear-grey;
+      box-shadow: $s-shadow;
+      width: 100%;
+      box-sizing: border-box;
+      &[type=checkbox] {
+        width: auto;
+        appearance: none;
+        border-radius: 0;
+        position: relative;
+        margin: 0;
+        margin-right: $base-spacing;
+        &:checked:before{
+          content: "";
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          background-color: $color-yellow;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+          box-shadow: $inner-shadow;
+        }
+      }
+    }
+  } 
 }

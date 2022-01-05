@@ -1,3 +1,8 @@
+::selection {
+  color: $color-black;
+  background: $color-yellow;
+}
+
 body{
   color: $color-black;
 }
@@ -30,12 +35,23 @@ section h1, section h2{
   }
 }
 
-a{
+a,input[type=submit],button{
   text-decoration: none;
   font-weight: 600;
+  color: $color-black;
   &:hover{
     color: $color-purple;
     text-decoration: none;
+  }
+}
+
+input[type=checkbox]{
+  cursor: pointer;
+}
+
+input{
+  &:focus-visible{
+    outline-color: $color-purple;
   }
 }
 

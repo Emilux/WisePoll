@@ -1,43 +1,30 @@
 @{
     ViewData["Title"] = "Login Page";
-    Layout = "_Layout-Vide";
+    ViewData["Class"] = "auth";
+    ViewData["SubmitValue"] = "Create account";
+    Layout = "_Layout-Auth";
 }
 
-<div id="login" class="container">
-    <div class="logo">
-        <img src="~/media/WisePollLogo.svg"/>
-    </div>
-
-    <img class="img-decoration" src="~/media/WisePuddle.svg" />
-    <img class="img-decoration" src="~/media/WisePuddle.svg" />
-
-    <div class="wrapper">
-        <div class="form">
-            <form method="post">
-                <div>
-                    <label>E-mail :</label>
-                    <input type="text" name="login" placeholder="login">
-                </div>
-
-                <div>
-                    <div>
-                        <label>Password :</label>
-                    </div>
-                    <input type="text" name="password" placeholder="password">
-                </div>
-                
-                <div>
-                    <label>Pseudo</label>
-                    <input type="text" name="pseudo" placeholder="Pseudo">
-                </div>
-
-                <div class="row">
-                    <input type="submit" class="btn btn-primary col-md-6" value="Create account">
-                    <a  class="col-md-6" href="#">Back to home <img src="/media/ChevronRight.svg" /></a>
-                </div>
-            </form>
-
-            <p class="text-center"><a href="#">Sign in</a></p>
-        </div>
-    </div>
+<div class="form-group">
+    <label class="form-label" for="email">E-mail :</label>
+    <input class="form-field" id="email" type="text" name="login" placeholder="login">
 </div>
+
+<div class="form-group">
+    <label class="form-label" for="pseudo">Pseudo</label>
+    <input class="form-field" id="pseudo" type="text" name="pseudo" placeholder="Pseudo">
+</div>
+
+<div class="form-group">
+    <label class="form-label" for="password">Password :</label>
+    <input class="form-field" id="password" type="text" name="password" placeholder="password">
+</div>
+
+<div class="form-group">
+    <label class="form-label" for="confirm_password">Confirm Password :</label>
+    <input class="form-field" type="text" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+</div>
+
+@section RedirectButton{
+    <div class="register-now-link">Already Registered ? <a class="link link-primary link-underline" asp-area="" asp-controller="Auth" asp-action="Login">Log In</a></div>
+}

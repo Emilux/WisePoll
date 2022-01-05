@@ -6,6 +6,10 @@
   background-size: cover;
   background-image: url(../../media/WisePuddle.svg);
   background-repeat: no-repeat;
+  display: none;
+  @include media-breakpoint-up(sm) {
+    display: block;
+  }
   &-right{
     top: 0;
     right: 0;
