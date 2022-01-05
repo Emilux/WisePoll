@@ -1,0 +1,12 @@
+.link {
+  &-primary, &-primary a{
+    color: $color-purple;
+  }
+  &-icon{
+    display: flex;
+    align-items: center;
+    i{
+      margin-right: 10px;
+    }
+  }
+}

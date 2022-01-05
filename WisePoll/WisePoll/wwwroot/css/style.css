@@ -1,0 +1,237 @@
+/* Sass utils */
+/* Colors */
+/* Text sizing */
+/* Spacing */
+/* Shadow */
+/* Vendors */
+/* Base */
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap");
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+@font-face {
+  font-family: "wisepoll";
+  src: url("../fonts/wisepoll.eot?pq34j");
+  src: url("../fonts/wisepoll.eot?pq34j#iefix") format("embedded-opentype"), url("../fonts/wisepoll.ttf?pq34j") format("truetype"), url("../fonts/wisepoll.woff?pq34j") format("woff"), url("../fonts/wisepoll.svg?pq34j#wisepoll") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+[class^=icon-], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "wisepoll" !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-DeleteIcon:before {
+  content: "\e900";
+}
+
+.icon-PlusIcon:before {
+  content: "\e901";
+}
+
+.icon-ChevronRight:before {
+  content: "\e902";
+}
+
+.icon-ChevronLeft:before {
+  content: "\e903";
+}
+
+.icon-pencil:before {
+  content: "\e905";
+}
+
+.icon-eye:before {
+  content: "\e9ce";
+}
+
+.icon-eye-blocked:before {
+  content: "\e9d1";
+}
+
+.icon-checkmark:before {
+  content: "\ea10";
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.875rem;
+  font-weight: 600;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+.subtitle-primary {
+  color: #79018C;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Layout */
+.form-group {
+  margin-top: 1.875rem;
+}
+.form-check {
+  margin-top: 1.875rem;
+  display: flex;
+  align-items: center;
+}
+.form-label {
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+.form-label-check {
+  display: block;
+}
+.form-field {
+  display: block;
+  padding: 1rem;
+  border: 1px solid #F4F4F4;
+  box-shadow: 0px 0px 15px -7px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  box-sizing: border-box;
+}
+.form-field[type=checkbox] {
+  width: auto;
+  appearance: none;
+  border-radius: 0;
+  position: relative;
+  margin: 0;
+  margin-right: 1rem;
+}
+.form-field[type=checkbox]:checked:before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #FFBF4C;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.25);
+}
+
+.nav {
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 1.875rem;
+  padding-left: 1.875rem;
+}
+.nav-brand {
+  height: 45px;
+}
+.nav-brand img {
+  height: 100%;
+}
+.nav-navigation {
+  display: flex;
+  align-items: center;
+}
+.nav-navigation-item {
+  margin-right: 1.875rem;
+}
+.nav-navigation-item:last-of-type {
+  margin-right: 0;
+}
+.nav-navigation-item-link {
+  color: black;
+}
+
+/* Components */
+.btn {
+  padding: 1rem 1.875rem;
+  border-radius: 4.75rem;
+  text-decoration: none;
+  box-sizing: border-box;
+  display: inline-block;
+}
+.btn-primary {
+  background-color: #FFBF4C;
+  color: black;
+}
+
+.link-primary, .link-primary a {
+  color: #79018C;
+}
+.link-icon {
+  display: flex;
+  align-items: center;
+}
+.link-icon i {
+  margin-right: 10px;
+}
+
+/* Pages */
+
+/*# sourceMappingURL=style.css.map */

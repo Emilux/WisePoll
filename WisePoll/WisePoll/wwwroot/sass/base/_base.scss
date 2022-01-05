@@ -1,0 +1,26 @@
+h1{
+  font-size: $l-text-size;
+  font-weight: 700;
+}
+
+h2{
+  font-size: $m-text-size;
+  font-weight: 600;
+}
+
+.subtitle{
+  font-size: $s-text-size;
+  font-weight: 400;
+  &-primary{
+    color: $color-purple;
+  }
+}
+
+a{
+  text-decoration: none;
+  font-weight: 600;
+}
+
+img{
+  max-width: 100%;
+}
