@@ -1,0 +1,28 @@
+.nav{
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: $s-spacing;
+  padding-left: $s-spacing;
+  &-brand{
+    height: 45px;
+    img{
+      height: 100%;
+    }
+  }
+  &-navigation {
+    display: flex;
+    align-items: center;
+    &-item{
+      margin-right: $s-spacing;
+      &:last-of-type{
+        margin-right: 0;
+      }
+      &-link{
+        color: $color-black;
+      }
+    }
+  }
+
+}

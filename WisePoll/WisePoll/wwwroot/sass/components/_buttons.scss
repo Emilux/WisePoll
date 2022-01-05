@@ -1,0 +1,12 @@
+.btn
+{
+  padding: $base-spacing $s-spacing;
+  border-radius: $base-spacing+$s-spacing*2;
+  text-decoration: none;
+  box-sizing: border-box;
+  display: inline-block;
+  &-primary {
+    background-color: $color-yellow;
+    color: $color-black;
+  }
+}

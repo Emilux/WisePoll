@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "sass": "^1.45.2"
+  },
+  "name": "wisepoll-front",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "sass wwwroot/sass/app.scss wwwroot/css/style.css --style compressed",
+    "watch:css": "sass --watch wwwroot/sass/app.scss wwwroot/css/style.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

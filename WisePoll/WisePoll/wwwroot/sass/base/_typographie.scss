@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+
+// Font Variables
+$montserrat: 'Montserrat', sans-serif;
+
+body {
+  font-family: $montserrat;
+}
+
+@font-face {
+  font-family: 'wisepoll';
+  src:  url('../fonts/wisepoll.eot?pq34j');
+  src:  url('../fonts/wisepoll.eot?pq34j#iefix') format('embedded-opentype'),
+  url('../fonts/wisepoll.ttf?pq34j') format('truetype'),
+  url('../fonts/wisepoll.woff?pq34j') format('woff'),
+  url('../fonts/wisepoll.svg?pq34j#wisepoll') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'wisepoll' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-DeleteIcon:before {
+  content: "\e900";
+}
+.icon-PlusIcon:before {
+  content: "\e901";
+}
+.icon-ChevronRight:before {
+  content: "\e902";
+}
+.icon-ChevronLeft:before {
+  content: "\e903";
+}
+.icon-pencil:before {
+  content: "\e905";
+}
+.icon-eye:before {
+  content: "\e9ce";
+}
+.icon-eye-blocked:before {
+  content: "\e9d1";
+}
+.icon-checkmark:before {
+  content: "\ea10";
+}
