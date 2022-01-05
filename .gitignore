@@ -368,6 +368,10 @@ FodyWeavers.xsd
 # Node
 node_modules
 
-#CSS compilée
+# CSS compilée
 style.css
 style.css.map
+
+# App Settings
+appsettings.json
+appsettings.Developpement.json

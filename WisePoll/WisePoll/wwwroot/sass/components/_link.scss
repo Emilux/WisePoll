@@ -11,10 +11,18 @@ a.link {
     color: $color-purple;
   }
   &-icon{
+    display: flex;
+    align-items: center;
     i{
       line-height: 0;
       vertical-align: middle;
       margin-right: 10px;
+    }
+    &-revert {
+      i{
+        margin-left: 10px;
+        margin-right: 0;
+      }
     }
   }
 
