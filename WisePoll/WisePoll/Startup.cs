@@ -1,13 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using WisePoll.Data;
 
 namespace WisePoll
 {
@@ -24,6 +21,13 @@ namespace WisePoll
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            var cn = Configuration.GetConnectionString("mainDb");
+            var serverVersion = new MySqlServerVersion(ServerVersion.AutoDetect(cn));
+            services.AddDbContext<ApplicationDbContext>(
+                builder =>
+                {
+                    builder.UseMySql(cn, serverVersion);
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace WisePoll.Services
+﻿namespace WisePoll.Services
 {
     public class WiseServices
     {

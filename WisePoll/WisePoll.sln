@@ -3,15 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WisePoll", "WisePoll\WisePoll.csproj", "{6196C987-E210-4DD4-A6D7-9DF66F4ECE5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WisePoll", "WisePoll\WisePoll.csproj", "{6196C987-E210-4DD4-A6D7-9DF66F4ECE5D}"
 	ProjectSection(ProjectDependencies) = postProject
-		{318F0E5A-EF7E-4DF1-917D-96435A8D84E9} = {318F0E5A-EF7E-4DF1-917D-96435A8D84E9}
 		{9BD964A3-85DA-4DFD-9A89-1A2B8617F594} = {9BD964A3-85DA-4DFD-9A89-1A2B8617F594}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WisePoll.Data", "WisePoll.Data\WisePoll.Data.csproj", "{9BD964A3-85DA-4DFD-9A89-1A2B8617F594}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WisePoll.Data", "WisePoll.Data\WisePoll.Data.csproj", "{9BD964A3-85DA-4DFD-9A89-1A2B8617F594}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WisePoll.Services", "WisePoll.Services\WisePoll.Services.csproj", "{318F0E5A-EF7E-4DF1-917D-96435A8D84E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WisePoll.Services", "WisePoll.Services\WisePoll.Services.csproj", "{318F0E5A-EF7E-4DF1-917D-96435A8D84E9}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9BD964A3-85DA-4DFD-9A89-1A2B8617F594} = {9BD964A3-85DA-4DFD-9A89-1A2B8617F594}
 	EndProjectSection

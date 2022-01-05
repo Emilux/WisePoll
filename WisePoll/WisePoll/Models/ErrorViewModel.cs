@@ -1,5 +1,3 @@
-using System;
-
 namespace WisePoll.Models
 {
     public class ErrorViewModel

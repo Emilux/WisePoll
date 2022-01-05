@@ -1,8 +1,18 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using WisePoll.Data.Models;
 
 namespace WisePoll.Data
 {
-    public class ApplicationDbContext
+    public class ApplicationDbContext : DbContext
     {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+
+        }
+
+        public DbSet<Members> Members { get; set; }
+        public DbSet<Polls> Polls { get; set; }
+        public DbSet<Poll_fields> Poll_fields { get; set; }
+        public DbSet<Users> Users { get; set; }
     }
 }
