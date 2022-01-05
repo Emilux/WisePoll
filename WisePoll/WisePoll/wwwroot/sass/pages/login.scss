@@ -1,0 +1,135 @@
+#login {
+    font-size: 16px;
+
+    .logo {
+        max-width: 85px;
+        margin-top: $m-spacing;
+    }
+
+    .wrapper {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        min-height: 100%;
+        margin-top: 18%;
+
+        .form {
+            background: #fff;
+            padding: 30px;
+            width: 90%;
+            max-width: 415px;
+            padding: 25px;
+            -moz-border-radius: 15px;
+            -webkit-border-radius: 15px;
+            border-radius: 15px;
+            box-shadow: 10px 10px 45px 6px rgba(0,0,0,0.07);
+            -webkit-box-shadow: 10px 10px 45px 6px rgba(0,0,0,0.07);
+            -moz-box-shadow: 10px 10px 45px 6px rgba(0,0,0,0.07);
+
+            div {
+                &:nth-child(1) {
+                    align-items: center;
+                    label {
+                        &:first-of-type {
+                            display: block;
+                        }
+                    }
+                }
+
+                &:nth-child(2) {
+                    a {
+                        color: $color-purple;
+                    }
+                }
+
+                &:nth-child(3) label {
+                    display: flex;
+                    align-items: center;
+
+                    input {
+                        visibility: hidden;
+                        display: block;
+                        height: 0;
+                        width: 0;
+                        position: absolute;
+                        overflow: hidden;
+                    }
+
+                    span {
+                        height: 40px;
+                        width: 40px;
+                        display: inline-block;
+                        box-shadow: 0px 0px 15px 4px rgba(0,0,0,0.03);
+                        -webkit-box-shadow: 0px 0px 15px 4px rgba(0,0,0,0.03);
+                        -moz-box-shadow: 0px 0px 15px 4px rgba(0,0,0,0.03);
+                    }
+
+                    [type=checkbox]:checked + span {
+                        background: $color-yellow;
+                    }
+
+                    p {
+                        margin-left: 15px;
+                    }
+                }
+
+                &:last-child {
+                    margin-top: $base-spacing;
+                    a {
+                        color: $color-black !important;
+                        display: flex;
+                        align-items: center;
+                    }
+
+                    img {
+                        width: 12px;
+                        margin-left: 5px;
+                    }
+                }
+            }
+
+            p:nth-child(2) {
+                margin-top: $s-spacing;
+
+                a {
+                    color: $color-purple;
+                }
+            }
+
+            label {
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            input:not(.btn) {
+                margin-bottom: 0.5rem;
+                width: 100%;
+                height: 50px;
+                border: none;
+                padding-left: 10px;
+                box-shadow: 0px 0px 15px 4px rgba(0,0,0,0.03);
+                -webkit-box-shadow: 0px 0px 15px 4px rgba(0,0,0,0.03);
+                -moz-box-shadow: 0px 0px 15px 4px rgba(0,0,0,0.03);
+            }
+        }
+    }
+
+    .img-decoration {
+        position: absolute;
+        z-index: -10;
+
+        &:nth-child(2) {
+            top: 0;
+            right: 0;
+            max-width: 50%;
+        }
+
+        &:nth-child(3) {
+            bottom: 0;
+            left: 0;
+            transform: rotate(0.5turn);
+            max-width: 40%;
+        }
+    }
+}
