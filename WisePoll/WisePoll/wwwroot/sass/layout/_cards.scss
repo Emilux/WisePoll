@@ -1,0 +1,46 @@
+.card{
+  padding: $base-spacing;
+  background-color: $color-white;
+  position: relative;
+  border-radius: $base-radius;
+  &:before{
+    box-shadow: 0px 0px 40px -15px rgb(0 0 0 / 20%);
+    content: "";
+    height: 75%;
+    border-radius: 50% 50% $base-radius $base-radius;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
+    padding: 1.875rem;
+    box-sizing: border-box;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  &-header{
+    text-align: center;
+    img{
+      width: 75%;
+    }
+  }
+  &-body{
+    &-title{
+      font-weight:600 ;
+      display: inline-block;
+      padding: $xs-spacing;
+      margin-bottom: $base-spacing;
+      &-yellow{
+        background-color: $color-yellow;
+        color: $color-black;
+      }
+      &-purple{
+        background-color: $color-purple;
+        color: $color-white;
+      }
+      &-rose{
+        background-color: $color-rose;
+        color: $color-black;
+      }
+    }
+  }
+}

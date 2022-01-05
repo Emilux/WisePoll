@@ -1,0 +1,29 @@
+.home{
+  .header{
+    overflow: hidden;
+    z-index: 1;
+    padding-top: $xl-spacing;
+    padding-bottom: $xl-spacing;
+    position: relative;
+    background-color: lighten($color-purple,70%);
+    .wisepuddle{
+      &-right{
+        width: 410px;
+        height: 80%;
+      }
+      &-bottom-left{
+        width: 230px;
+        height: 45%;
+      }
+    }
+  }
+  .card{
+    &-down{
+      margin-top: $l-spacing;
+    }
+  }
+  .lets-start-btn{
+    text-align: center;
+    margin-top: $l-spacing;
+  }
+}

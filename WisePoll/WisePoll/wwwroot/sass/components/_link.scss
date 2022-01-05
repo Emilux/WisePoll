@@ -1,12 +1,21 @@
-.link {
-  &-primary, &-primary a{
+a.link {
+  &:hover{
+    color: $color-purple;
+  }
+  &-underline{
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+  &-primary{
     color: $color-purple;
   }
   &-icon{
-    display: flex;
-    align-items: center;
     i{
+      line-height: 0;
+      vertical-align: middle;
       margin-right: 10px;
     }
   }
+
 }

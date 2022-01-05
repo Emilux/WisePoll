@@ -1,7 +1,16 @@
+/* Boostrap */
+@import "vendors/bootstrap/functions";
+@import "vendors/bootstrap/variables";
+
 /* Sass utils */
 @import "sass-utils/variables";
 
 /* Vendors */
+@import "vendors/bootstrap/mixins";
+@import "vendors/bootstrap/root";
+@import "vendors/bootstrap/reboot";
+@import "vendors/bootstrap/grid";
+@import "vendors/bootstrap/utilities";
 
 /* Base */
 @import "base/reset";
@@ -12,8 +21,13 @@
 @import "layout/grid";
 @import "layout/forms";
 @import "layout/navigation";
+@import "layout/footer";
+@import "layout/cards";
+
 /* Components */
 @import "components/buttons";
 @import "components/link";
+@import "components/wisepuddle";
 
 /* Pages */
+@import "pages/home";

@@ -4,6 +4,10 @@ $color-rose: #F14460;
 $color-purple: #79018C;
 $color-black: black;
 $color-clear-grey: #F4F4F4;
+$color-white: white;
+
+/* radius */
+$base-radius:15px;
 
 /* Text sizing */
 $base-text-size: 1rem;
@@ -12,12 +16,17 @@ $m-text-size: 1.875rem;
 $s-text-size: 1.5rem;
 
 /* Spacing */
+$xl-spacing: 9.25rem;
 $l-spacing: 4.375rem;
 $m-spacing: 3.125rem;
 $s-spacing: 1.875rem;
+$xs-spacing: 0.313rem;
 $base-spacing: 1rem;
 
 /* Shadow */
+$base-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 $s-shadow: 0px 0px 15px -7px rgba(0, 0, 0, 0.25);
-$m-shadow: 0px 0px 15px -7px rgba(0, 0, 0, 0.25);
+$bottom-s-shadow: 0px 4px 15px -7px rgba(0, 0, 0, 0.25);
+$top-s-shadow: 0px -4px 15px -7px rgba(0, 0, 0, 0.25);
+$m-shadow: 0px 0px 45px -20px rgba(0, 0, 0, 0.2);
 $inner-shadow: 0px 0px 1px rgba(0, 0, 0, 0.25);

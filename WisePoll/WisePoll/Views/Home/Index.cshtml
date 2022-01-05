@@ -1,8 +1,83 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    ViewData["Class"] = "home";
+}
+@section header {
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1>Welcome to WisePoll<br> Use this website to create polls</h1>
+                <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Index">Create a poll</a>
+            </div>
+
+            <div class="wisepuddle-group">
+                <div class="wisepuddle wisepuddle-right"></div>
+                <div class="wisepuddle wisepuddle-bottom-left"></div>
+            </div>
+        </div>
+    </header>
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section>
+    <h2>How it works ?</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <img src="/media/CheckListIllustration.svg" alt="">      
+                </div>
+                <div class="card-body">
+                    <div class="card-body-title card-body-title-purple">
+                        Create your poll
+                    </div>
+                    <div class="card-body-content">
+                        <p>
+                           Start by <a class="link link-primary link-underline" asp-area="" asp-controller="Home" asp-action="Index">creating your own poll</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 card-down">
+            <div class="card">
+                <div class="card-header">
+                    <img src="/media/ParticipantsIllustration.svg" alt="">              
+                </div>
+                <div class="card-body">
+                    <div class="card-body-title card-body-title-yellow">
+                        Add participants        
+                    </div>
+                    <div class="card-body-content">
+                        <p>
+                            Add all the participants using their mail.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <img src="/media/ResultIllustration.svg" alt="">      
+                </div>
+                <div class="card-body">
+                    <div class="card-body-title card-body-title-rose">
+                        See the result                
+                    </div>
+                    <div class="card-body-content">
+                        <p>
+                            When the poll is ended you and the participants can see his result.
+                        </p>
+                    </div>
+                </div>
+            </div>  
+        </div>
+       
+    </div>
+    <div class="lets-start-btn">
+        <a href="" class="btn btn-primary">
+          Let's create a poll ! 
+        </a>  
+    </div>
+
+</section>

@@ -28,10 +28,18 @@
     <Folder Include="wwwroot\sass\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Include="wwwroot/scss/**/*.scss" Set="Css" />
+    <UpToDateCheckBuilt Include="wwwroot/css/*.css" Set="Css" />
+  </ItemGroup>
+
   <Target Name="Install NPM modules" BeforeTargets="Build" Inputs="package.json" Outputs="node_modules/.install-stamp">
     <Exec Command="npm install" Condition="'$(OS)' == 'Windows_NT'" />
-    <Exec Command="npm run build:css" />
     <Touch Files="node_modules/.install-stamp" AlwaysCreate="true" />
+  </Target>
+
+  <Target Name="Build scss" BeforeTargets="PreBuildEvent">
+    <Exec Command="npm run build:css" />
   </Target>
   
   <Target Name="Compile SCSS" BeforeTargets="CopyFilesToPublishDirectory">
