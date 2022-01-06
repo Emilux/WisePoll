@@ -7,6 +7,9 @@
     position: relative;
     background-color: lighten($color-purple,70%);
     height: calc(100vh - 75px);
+    .btn{
+      margin-top:0;
+    }
     @include media-breakpoint-up(sm) {
       height: auto;
     }
@@ -51,6 +54,9 @@
   .lets-start-btn{
     text-align: center;
     margin-top: $l-spacing;
+    .btn{
+      margin-top:0;
+    }
   }
 }
 

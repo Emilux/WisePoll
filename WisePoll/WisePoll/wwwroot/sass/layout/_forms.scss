@@ -5,6 +5,15 @@ form{
       &:first-of-type{
         margin-top: 0;
       }
+      &-icon{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        i{
+          margin-left: $base-spacing;
+          font-size: $m-text-size;
+        }
+      }
     }
     &-check{
       margin-top: $s-spacing ;
@@ -31,6 +40,22 @@ form{
       box-shadow: $s-shadow;
       width: 100%;
       box-sizing: border-box;
+      &-email{
+        display: flex;
+        align-items: center;
+        &-content{
+          background-color: $color-yellow;
+          margin-right: $base-spacing;
+        }
+        input[type=text]{
+          border: 0;
+          margin: 0;
+          padding: 0;
+          &:focus, &:focus-visible{
+            outline: none;
+          }
+        }
+      }
       &[type=checkbox] {
         width: auto;
         appearance: none;

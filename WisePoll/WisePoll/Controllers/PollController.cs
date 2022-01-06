@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WisePoll.Controllers
 {
     public class PollController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Create()
         {
-            return View();
+            return View(); 
         }
+        
         public IActionResult Vote()
         {
             return View();
