@@ -13,5 +13,10 @@ namespace WisePoll.Controllers
             return View();
         }
 
+        public IActionResult Success()
+        {
+            return View();
+        }
+
     }
 }
