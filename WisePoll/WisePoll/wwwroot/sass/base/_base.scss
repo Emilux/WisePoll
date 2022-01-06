@@ -50,8 +50,11 @@ input[type=checkbox]{
 }
 
 input{
+  outline: solid 2px;
+  outline-color: rgba($color-purple, 0);
+  transition: outline-color 200ms;
   &:focus-visible{
-    outline-color: $color-purple;
+    outline-color: rgba($color-purple, 1);
   }
 }
 

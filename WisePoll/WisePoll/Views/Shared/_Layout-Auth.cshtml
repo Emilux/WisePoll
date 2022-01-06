@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WisePoll</title>
     <link rel="stylesheet" href="~/css/style.css" />
+    <script> </script>
 </head>
 <body class="@ViewData["Class"]">
     <nav class="nav">
@@ -14,32 +15,31 @@
             </a>
         </div>
     </nav>
-    <main role="main">
-        <div class="wisepuddle-group">
-            <div class="wisepuddle wisepuddle-right"></div>
-            <div class="wisepuddle wisepuddle-bottom-left"></div>
-        </div>
-        <div class="auth-form">
-            <form class="form">
-                @RenderBody()
-                <div class="auth-form-submit">
-                    <input type="submit" class="btn btn-primary" value="@ViewData["SubmitValue"]">
-                    <a class="link link-icon link-icon-revert" asp-area="" asp-controller="Home" asp-action="Index">Back to home <i class="icon-ChevronRight"></i></a>
-                </div>
-            </form>
+<main role="main">
+    <div class="wisepuddle-group">
+        <div class="wisepuddle wisepuddle-right"></div>
+        <div class="wisepuddle wisepuddle-bottom-left"></div>
+    </div>
+    <div class="auth-form">
+        <form class="form">
+            @RenderBody()
+            <div class="auth-form-submit">
+                <input type="submit" class="btn btn-primary" value="@ViewData["SubmitValue"]">
+                <a class="link link-icon link-icon-revert" asp-area="" asp-controller="Home" asp-action="Index">Back to home <i class="icon-ChevronRight"></i></a>
+            </div>
+        </form>
             
-            @if (IsSectionDefined("RedirectButton")) { 
-                @RenderSection("RedirectButton")
-            }
-            else { 
-               <div class="register-now-link"><a class="link link-primary link-underline" asp-area="" asp-controller="Auth" asp-action="Register">No account ? Register now</a></div>
-            }
-        </div>
-        
-    </main>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+        @if (IsSectionDefined("RedirectButton")) { 
+            @RenderSection("RedirectButton")
+        }
+        else { 
+            <div class="register-now-link"><a class="link link-primary link-underline" asp-area="" asp-controller="Auth" asp-action="Register">No account ? Register now</a></div>
+        }
+    </div>
+</main>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
