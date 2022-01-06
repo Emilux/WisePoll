@@ -38,16 +38,23 @@ form{
         position: relative;
         margin: 0;
         margin-right: $base-spacing;
-        &:checked:before{
-          content: "";
+
+        &:before{
+          content: "\ea10";
+          font-family: 'wisepoll' !important;
           position: absolute;
-          width: 20px;
-          height: 20px;
-          background-color: $color-yellow;
+          font-size: $base-text-size;
+          color: $color-yellow;
           top: 50%;
           left: 50%;
           transform: translate(-50%,-50%);
-          box-shadow: $inner-shadow;
+          opacity: 0;
+          transition: opacity 200ms;
+        }
+        
+        &:checked:before{
+          color: $color-purple;
+          opacity: 1;
         }
       }
     }
