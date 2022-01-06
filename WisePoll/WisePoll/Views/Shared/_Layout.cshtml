@@ -11,7 +11,15 @@
     <script> </script>
 </head>
 <body class="@ViewData["Class"]">
-<partial name="_navigation"/>
+    
+    @if (@Model)
+   {
+        <partial name="_LoggedNav"/>
+    } 
+    else
+    {
+        <partial name="_navigation"/>
+    }
 
 @if (IsSectionDefined("header"))
 {
