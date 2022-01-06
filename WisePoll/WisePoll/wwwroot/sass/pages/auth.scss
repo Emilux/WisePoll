@@ -20,16 +20,9 @@
         width: 100%;
         max-width: 610px;
         border-radius: $base-radius;
-
+        overflow: auto;
         @include media-breakpoint-up(sm) {
-            overflow: scroll;
             max-height: 100%;
-            &::-webkit-scrollbar {
-                display: none;
-            }
-        }
-
-        @include media-breakpoint-up(sm) {
             padding: $m-spacing;
             box-shadow: $m-shadow;
             background-color: $color-white;
