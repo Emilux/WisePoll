@@ -1,0 +1,14 @@
+#PollVote {
+    .form {
+        div {
+            display: flex;
+            align-items: center;
+        }
+
+        form-field[type=checkbox] {
+            width: 40px;
+            height: 40px;
+            box-shadow: $base-shadow;
+        }
+    }
+}
