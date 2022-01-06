@@ -1,5 +1,16 @@
 .auth {
-
+    padding-bottom: 0;
+    main {
+        margin: 0;
+        height: calc(100vh - 75px);
+        @include media-breakpoint-up(sm) {
+            height: auto;
+        }
+    }
+    .nav{
+        background-color: transparent;
+        display: flex;
+    }
     @include media-breakpoint-up(sm) {
         height: 100vh;
         overflow: hidden;
@@ -21,6 +32,10 @@
         max-width: 610px;
         border-radius: $base-radius;
         overflow: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 100%;
         @include media-breakpoint-up(sm) {
             max-height: 100%;
             padding: $m-spacing;
@@ -30,6 +45,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%,-50%);
+            display: block;
+            min-height: auto;
         }
         &-submit{
             margin-top: $m-spacing;

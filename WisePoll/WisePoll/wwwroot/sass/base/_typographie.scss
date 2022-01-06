@@ -46,8 +46,14 @@ body {
 .icon-ChevronLeft:before {
   content: "\e903";
 }
+.icon-home:before {
+  content: "\e904";
+}
 .icon-pencil:before {
   content: "\e905";
+}
+.icon-user:before {
+  content: "\e971";
 }
 .icon-eye:before {
   content: "\e9ce";
@@ -57,4 +63,10 @@ body {
 }
 .icon-checkmark:before {
   content: "\ea10";
+}
+.icon-enter:before {
+  content: "\ea13";
+}
+.icon-exit:before {
+  content: "\ea14";
 }

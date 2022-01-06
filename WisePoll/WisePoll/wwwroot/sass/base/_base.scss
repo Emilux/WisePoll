@@ -5,13 +5,26 @@
 
 body{
   color: $color-black;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 272px;
+  @include media-breakpoint-up(sm) {
+    padding-bottom: 197px;
+  }
+  @include media-breakpoint-up(md) {
+    padding-bottom: 75px;
+  }
 }
 
 h1{
-  font-size: $l-text-size;
-  line-height: 57px;
+  font-size: $m-text-size;
+  line-height: normal;
   font-weight: 700;
   margin-bottom: $s-spacing;
+  @include media-breakpoint-up(sm) {
+    line-height: 57px;
+    font-size: $l-text-size;
+  }
 }
 
 h2{
@@ -28,10 +41,15 @@ section h1, section h2{
 }
 
 .subtitle{
-  font-size: $s-text-size;
+  font-size: $base-text-size;
+  line-height: 19.5px;
   font-weight: 400;
   &-primary{
     color: $color-purple;
+  }
+  @include media-breakpoint-up(sm) {
+    font-size: $s-text-size;
+    line-height: 29.26px;
   }
 }
 
@@ -45,14 +63,23 @@ a,input[type=submit],button{
   }
 }
 
-input[type=checkbox]{
-  cursor: pointer;
-}
-
-input{
+input,textarea{
   outline: solid 2px;
   outline-color: rgba($color-purple, 0);
   transition: outline-color 200ms;
+  &:focus-visible{
+    outline-color: rgba($color-purple, 1);
+  }
+  &:focus{
+    outline-color: rgba($color-purple, 1);
+  }
+}
+
+input[type=checkbox]{
+  cursor: pointer;
+  &:focus{
+    outline-color: rgba($color-purple, 0);
+  }
   &:focus-visible{
     outline-color: rgba($color-purple, 1);
   }
@@ -60,6 +87,15 @@ input{
 
 img{
   max-width: 100%;
+}
+
+main{
+  margin-top: $m-spacing;
+  margin-bottom: $m-spacing;
+  min-height: calc(100% - 75px - 197px);
+  @include media-breakpoint-up(md) {
+    min-height: calc(100% - 75px * 2);
+  }
 }
 
 section{

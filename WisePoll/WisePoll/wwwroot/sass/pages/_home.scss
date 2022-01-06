@@ -6,20 +6,46 @@
     padding-bottom: $xl-spacing;
     position: relative;
     background-color: lighten($color-purple,70%);
+    height: calc(100vh - 75px);
+    @include media-breakpoint-up(sm) {
+      height: auto;
+    }
+    .container{
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      height: 100%;
+      @include media-breakpoint-up(sm) {
+        display: block;
+        height: auto;
+      }
+    }
     .wisepuddle{
+      display: block;
       &-right{
-        width: 410px;
-        height: 80%;
+        width: 200px;
+        height: 200px;
+        @include media-breakpoint-up(sm) {
+          width: 410px;
+          height: 80%;
+        }
       }
       &-bottom-left{
-        width: 230px;
-        height: 45%;
+        width: 100px;
+        height: 100px;
+        @include media-breakpoint-up(sm) {
+          width: 230px;
+          height: 45%;
+        }
       }
     }
   }
   .card{
-    &-down{
-      margin-top: $l-spacing;
+    margin-top: $m-spacing;
+    @include media-breakpoint-up(md) {
+      &-down{
+        margin-top: $l-spacing;
+      }
     }
   }
   .lets-start-btn{
