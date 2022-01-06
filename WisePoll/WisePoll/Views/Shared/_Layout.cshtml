@@ -12,8 +12,8 @@
     <script> </script>
 </head>
 <body class="@ViewData["Class"]">
-    
-            <partial name="_navigation"/>
+@{/* @todo check if user is logged and show loggedinnav */}
+<partial name="_navigation"/>
 
 
 @if (IsSectionDefined("header"))
@@ -40,6 +40,7 @@ else
 <script src="~/lib/tagify/js/tagify.polyfills.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script src="~/js/choices.js" asp-append-version="true"></script>
+<script src="~/js/pollResult.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

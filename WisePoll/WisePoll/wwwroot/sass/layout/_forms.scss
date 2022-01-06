@@ -54,7 +54,7 @@ form.form, .form {
       align-items: center;
     }
   }
-  &-field, .bootstrap-tagsinput{
+  &-field{
     display: block;
     padding: $base-spacing;
     border: 1px solid $color-clear-grey;
@@ -87,7 +87,7 @@ form.form, .form {
       position: relative;
       margin: 0;
       margin-right: $base-spacing;
-
+      padding: $base-spacing;
       &:before{
         content: "\ea10";
         font-family: 'wisepoll' !important;
