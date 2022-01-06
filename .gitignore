@@ -375,3 +375,6 @@ style.css.map
 # App Settings
 appsettings.json
 appsettings.Developpement.json
+
+# DS STORE
+.DS_Store
