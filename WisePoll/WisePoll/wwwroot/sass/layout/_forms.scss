@@ -1,90 +1,113 @@
-form{
-  .form {
-    &-group{
-      margin-top: $s-spacing ;
-      &:first-of-type{
-        margin-top: 0;
-      }
-      &-icon{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        i{
-          margin-left: $base-spacing;
-          font-size: $m-text-size;
-        }
-      }
+form.form, .form {
+  
+  .add-more-choice-btn{
+    margin-top: $base-spacing;
+  }
+  
+  &-group{
+    margin-top: $s-spacing ;
+    &:first-of-type{
+      margin-top: 0;
     }
-    &-check{
-      margin-top: $s-spacing ;
+    &-icon{
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      i{
+        margin-left: $base-spacing;
+        font-size: $m-text-size;
+        &:before{
+          vertical-align: middle;
+        }
+      }
     }
-    &-label{
-      margin-bottom: $base-spacing;
-      display: inline-block;
-      &-check{
-        display:block;
+  }
+  &-check{
+    margin-top: $s-spacing ;
+    display: flex;
+    align-items: center;
+  }
+  &-indication{
+    margin-bottom: $base-spacing;
+    &-center{
+      .form-label{
+        justify-content: center;
         margin-bottom: 0;
       }
-      &:is(div){
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
     }
-    &-field{
-      display: block;
-      padding: $base-spacing;
-      border: 1px solid $color-clear-grey;
-      box-shadow: $s-shadow;
-      width: 100%;
-      box-sizing: border-box;
-      &-email{
-        display: flex;
-        align-items: center;
-        &-content{
-          background-color: $color-yellow;
-          margin-right: $base-spacing;
-        }
-        input[type=text]{
-          border: 0;
-          margin: 0;
-          padding: 0;
-          &:focus, &:focus-visible{
-            outline: none;
-          }
-        }
-      }
-      &[type=checkbox] {
-        width: auto;
-        appearance: none;
-        border-radius: 0;
-        position: relative;
-        margin: 0;
+  }
+  &-label{
+    margin-bottom: $base-spacing;
+    display: inline-block;
+    &-indication{
+      font-size: $xs-text-size;
+      font-weight: 300;
+      line-height: 14.63px;
+    }
+    &-check{
+      display:block;
+      margin-bottom: 0;
+    }
+    &:is(div){
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  &-field, .bootstrap-tagsinput{
+    display: block;
+    padding: $base-spacing;
+    border: 1px solid $color-clear-grey;
+    box-shadow: $s-shadow;
+    width: 100%;
+    box-sizing: border-box;
+    &:hover{
+      border-color: #ccc;
+    }
+    &-email{
+      display: flex;
+      align-items: center;
+      &-content{
+        background-color: $color-yellow;
         margin-right: $base-spacing;
-
-        &:before{
-          content: "\ea10";
-          font-family: 'wisepoll' !important;
-          position: absolute;
-          font-size: $base-text-size;
-          color: $color-yellow;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%,-50%);
-          opacity: 0;
-          transition: opacity 200ms;
-        }
-        &:checked{
-          outline: solid 2px;
-          outline-color: $color-purple;
-        }
-        &:checked:before{
-          color: $color-purple;
-          opacity: 1;
+      }
+      input[type=text]{
+        border: 0;
+        margin: 0;
+        padding: 0;
+        &:focus, &:focus-visible{
+          outline: none;
         }
       }
     }
-  } 
-}
+    &[type=checkbox] {
+      width: auto;
+      appearance: none;
+      border-radius: 0;
+      position: relative;
+      margin: 0;
+      margin-right: $base-spacing;
+
+      &:before{
+        content: "\ea10";
+        font-family: 'wisepoll' !important;
+        position: absolute;
+        font-size: $base-text-size;
+        color: $color-yellow;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        opacity: 0;
+        transition: opacity 200ms;
+      }
+      &:checked{
+        outline: solid 2px;
+        outline-color: $color-purple;
+      }
+      &:checked:before{
+        color: $color-purple;
+        opacity: 1;
+      }
+    }
+  }
+} 

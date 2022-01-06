@@ -7,7 +7,7 @@
         <div class="container">
             <div class="header-content">
                 <h1>Welcome to WisePoll<br> Use this website to create polls</h1>
-                <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Index">Create a poll</a>
+                <a class="btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Create">Create a poll</a>
             </div>
 
             <div class="wisepuddle-group">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="card-body-content">
                         <p>
-                           Start by <a class="link link-primary link-underline" asp-area="" asp-controller="Home" asp-action="Index">creating your own poll</a>.
+                           Start by <a class="link link-primary link-underline" asp-area="" asp-controller="Poll" asp-action="Create">creating your own poll</a>.
                         </p>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
        
     </div>
     <div class="lets-start-btn">
-        <a href="" class="btn btn-primary">
+        <a asp-area="" asp-controller="Poll" asp-action="Create" class="btn btn-primary">
           Let's create a poll ! 
         </a>  
     </div>

@@ -1,0 +1,58 @@
+.tagify{
+  outline: solid 2px;
+  outline-color: rgba($color-purple, 0);
+  transition: outline-color 200ms;
+  &.form-field{
+    padding: $base-spacing - (.3rem*2);
+  }
+
+  &.tagify--empty,&.tagify--noTags{
+    padding: $base-spacing;
+    .tagify__input{
+      padding:0;
+    }
+  }
+  
+  &__tag{
+    margin: .3rem .5rem;
+    > div {
+      &:before{
+        box-shadow: none;
+        background-color: $color-yellow;
+        color: $color-black;
+      }
+    }
+    &:hover{
+      > div {
+        &:before{
+          box-shadow: none!important;
+          background-color: darken($color-yellow,10%)!important;
+          color: $color-black!important;
+        }
+
+      }
+    }
+    &__removeBtn{
+      &:hover{
+        background-color: $color-black !important;
+        + div {
+          > span {
+            opacity: 1!important;
+          }
+          &:before{
+            box-shadow: none!important;
+            background-color: darken($color-yellow,10%)!important;
+            color: $color-black!important;
+          }
+        }
+      }
+    }
+  }
+  &__input{
+    margin: 0;
+  }
+  &--focus{
+    outline-color: rgba($color-purple, 1);
+    border: 1px solid #F4F4F4!important;
+  }
+}
