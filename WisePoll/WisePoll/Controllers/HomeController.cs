@@ -16,7 +16,15 @@ namespace WisePoll.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            bool loggedIn = false;
+            if (loggedIn)
+            {
+                return View("LoggedInIndex");
+            } else
+            {
+                return View();
+            }
+            
         }
 
         public IActionResult Privacy()

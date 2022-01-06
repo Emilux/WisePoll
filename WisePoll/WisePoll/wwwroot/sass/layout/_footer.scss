@@ -1,20 +1,46 @@
 .footer{
-  height: 75px;
-  display: flex;
+  height: auto;
   align-items: center;
   justify-content: space-between;
   padding-right: $s-spacing;
   padding-left: $s-spacing;
   box-shadow: $m-shadow;
+  flex-direction: column;
+  margin-bottom: 75px;
+  padding-top: $s-spacing;
+  padding-bottom: $s-spacing;
+  display: inline-flex;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  @include media-breakpoint-up(sm) {
+    margin-bottom: 0;
+  }
+  @include media-breakpoint-up(md) {
+    height: 75px;
+    flex-direction: row;
+  }
   &-brand{
     height: 45px;
     img{
       height: 100%;
     }
   }
+  &-copyright{
+    margin-top: $s-spacing;
+    text-align: center;
+    @include media-breakpoint-up(md) {
+      margin-top: 0;
+    }
+  }
   &-item{
     &-link{
       color: $color-black;
+    }
+    margin-top: $s-spacing;
+    
+    @include media-breakpoint-up(md) {
+      margin-top: 0;
     }
   }
 

@@ -9,10 +9,29 @@
             <a class="nav-navigation-item-link link link-icon" asp-area="" asp-controller="Home" asp-action="Index"><i class="icon-PlusIcon"></i>Create a poll</a>
         </div>
         <div class="nav-navigation-item">
-            <a class="nav-navigation-item-link" asp-area="" asp-controller="Auth" asp-action="Login">Log In</a>
+            <a class="nav-navigation-item-link " asp-area="" asp-controller="Auth" asp-action="Login">Log In</a>
         </div>
         <div class="nav-navigation-item">
             <a class="nav-navigation-item-link btn btn-primary" asp-area="" asp-controller="Auth" asp-action="Register">Register</a>
         </div>
     </div>
 </nav>
+<div class="nav-mobile">
+    <div class="nav-mobile-navigation-item">
+        <a class="nav-mobile-navigation-item-link" asp-area="" asp-controller="Home" asp-action="Index">
+            <i class="icon-home"></i>
+            <span>Home</span>
+        </a>
+    </div>
+    <div class="nav-mobile-navigation-item">
+        <a class="nav-mobile-navigation-item-link btn btn-primary" asp-area="" asp-controller="Auth" asp-action="Login">
+            <i class="icon-PlusIcon"></i>
+        </a>
+    </div>
+    <div class="nav-mobile-navigation-item">
+        <a class="nav-mobile-navigation-item-link" asp-area="" asp-controller="Auth" asp-action="Login">
+            <i class="icon-enter"></i>
+            <span>Log In</span>
+        </a>
+    </div>
+</div>

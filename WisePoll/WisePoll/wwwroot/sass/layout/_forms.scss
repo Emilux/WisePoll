@@ -51,7 +51,10 @@ form{
           opacity: 0;
           transition: opacity 200ms;
         }
-        
+        &:checked{
+          outline: solid 2px;
+          outline-color: $color-purple;
+        }
         &:checked:before{
           color: $color-purple;
           opacity: 1;

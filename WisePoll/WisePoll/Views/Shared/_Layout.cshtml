@@ -13,18 +13,21 @@
 <body class="@ViewData["Class"]">
 <partial name="_navigation"/>
 
-@if (IsSectionDefined("header")) { 
+@if (IsSectionDefined("header"))
+{
     @RenderSection("header")
 }
-else { 
+else
+{
     <partial name="_header"/>
 }
 
 <div class="container">
-    <main role="main" class="pb-3">
+    <main role="main">
         @RenderBody()
     </main>
 </div>
+
 
 <partial name="_footer"/>
 
