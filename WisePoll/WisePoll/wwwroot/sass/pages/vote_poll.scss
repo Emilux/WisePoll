@@ -12,3 +12,26 @@
         }
     }
 }
+
+.SuccessPoll {
+    .row {
+        align-items: center;
+        justify-content: center;
+
+        &.linkPoll {
+            flex-direction: column;
+            input {
+                max-width: 800px;
+                width: 80%;
+                padding: 1rem;
+                border: 1px solid $color-clear-grey;
+                box-shadow: $base-shadow;
+                box-sizing: border-box;
+            }
+
+            label {
+                margin: $base-spacing;
+            }
+        }
+    }
+}

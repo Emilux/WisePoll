@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Success Create Poll";
+    ViewData["HeaderTitle"] = "Congratulation";
+    ViewData["Subtitle"] = "You're created your poll";
+    ViewData["Class"] = "SuccessPoll";
+}
+@section header {
+    
+}
+<div class=header>
+    <div class="container">
+       <div class="header-titles">
+           <div class="subtitle subtitle-primary">@ViewData["Subtitle"]</div>
+           <h1>@ViewData["HeaderTitle"]</h1>
+       </div> 
+    </div>
+</div>
+
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
+    aliqua. Nibh ipsum consequat nisl vel pretium lectus. Nisi quis eleifend quam adipiscing vitae proin sagittis nisl 
+    rhoncus. Facilisi cras fermentum odio eu feugiat. 
+    Tellus orci ac auctor augue mauris augue neque. Integer enim neque volutpat ac tincidunt vitae semper.
+</p>
+
+<form class="row mt-5 linkPoll">
+    <label>Poll sharing link</label>
+    <input id="linkPoll" type="text" />
+</form>
+
+<div class="row mt-5">
+<a class="link link-icon link-icon-revert" asp-area="" asp-controller="Home" asp-action="Index">Back to home <i class="icon-ChevronRight"></i></a>
+</div>
