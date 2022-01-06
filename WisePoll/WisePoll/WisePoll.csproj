@@ -109,7 +109,7 @@
     <_ContentIncludedByDefault Remove="wwwroot\fonts\sass\vendors\bootstrap\_variables.scss" />
   </ItemGroup>
 
-  <Target Name="Install NPM modules" BeforeTargets="Build" Inputs="package.json" Outputs="node_modules/.install-stamp">
+  <Target Name="Install NPM modules" BeforeTargets="PreBuildEvent" Inputs="package.json" Outputs="node_modules/.install-stamp">
     <Exec Command="npm install" Condition="'$(OS)' == 'Windows_NT'" />
     <Touch Files="node_modules/.install-stamp" AlwaysCreate="true" />
   </Target>
