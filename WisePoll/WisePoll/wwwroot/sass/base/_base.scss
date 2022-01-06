@@ -16,6 +16,10 @@ body{
   }
 }
 
+strong{
+  font-weight: 600;
+}
+
 h1{
   font-size: $m-text-size;
   line-height: normal;
@@ -71,7 +75,7 @@ input,textarea{
     outline-color: rgba($color-purple, 1);
   }
   &:focus{
-    outline-color: rgba($color-purple, 1);
+    outline-color: rgba($color-purple, 1); 
   }
 }
 

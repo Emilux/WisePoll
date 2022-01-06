@@ -30,6 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <UpToDateCheckBuilt Include="wwwroot\lib\tagify\css\tagify.css">
+      <Set>Css</Set>
+    </UpToDateCheckBuilt>
     <UpToDateCheckInput Include="wwwroot/scss/**/*.scss" Set="Css" />
     <UpToDateCheckBuilt Include="wwwroot/css/*.css" Set="Css" />
   </ItemGroup>

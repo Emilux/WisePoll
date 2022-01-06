@@ -1,0 +1,47 @@
+@{
+    ViewData["Title"] = "Create a poll";
+    ViewData["HeaderTitle"] = "Create your own poll";
+    ViewData["Subtitle"] = "Create a poll ";
+    ViewData["SubmitValue"] = "Create the poll";
+}
+<form action="" class="form">
+    <div class="form-group">
+        <label for="title" class="form-label">Poll Title : </label>
+        <input type="text" id="title" name="title" class="form-field">
+    </div>
+    <div class="form-group">
+        <label for="description" class="form-label">Description : </label>
+        <textarea class="form-field" name="description" id="description" cols="30" rows="10"></textarea>
+    </div>
+    
+    <div class="form-group">
+        <div class="form-indication">
+            <div class="form-label">Choice(s) for this poll : </div>
+            <div class="form-label-indication">Maximum <strong>5</strong> choices</div>
+        </div>
+        <div class="form-choices" data-max-choices="5">
+            <div id="choice0" class="form-group form-group-icon">
+                <input type="text" class="form-field" name="choice[0]">
+                <a data-choice-id="choice0" href="#" class="delete-choice" disabled>
+                    <i class="icon-DeleteIcon"></i>
+                </a>
+            </div>
+        </div>
+        <div class="add-more-choice">
+            <a href="#" class="link link-icon add-more-choice-btn"><i class="icon-PlusIcon"></i>Add Choice</a>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="form-indication">
+            <div class="form-label">Add participants : </div>
+            <div class="form-label-indication">Fill the email of each participants. Separate each email with a space or comma.</div>
+        </div>
+        <input class="form-field taginput" name="participants" type="text">
+    </div>
+    
+    <div class="btn-center">
+        <input type="submit" class="btn btn-primary" value="@ViewData["SubmitValue"]">
+    </div>
+
+</form>

@@ -1,4 +1,4 @@
-a.btn, input[type=submit].btn, button.btn
+.btn,a.btn, input[type=submit].btn, button.btn
 {
   padding: $base-spacing $s-spacing;
   border-radius: $base-spacing+$s-spacing*2;
@@ -6,6 +6,10 @@ a.btn, input[type=submit].btn, button.btn
   box-sizing: border-box;
   display: inline-block;
   transition: background-color 200ms,color 200ms;
+  margin-top: $m-spacing;
+  &-center{
+    text-align: center;
+  }
   &-primary {
     background-color: $color-yellow;
     color: $color-black;
