@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WisePoll.Data.Models
 {
@@ -18,5 +20,8 @@ namespace WisePoll.Data.Models
         [Required]
         [StringLength(255)]
         public string Password { get; set; }
+
+        [ForeignKey("UsersId")]
+        public ICollection<Polls> Polls { get; set; }
     }
 }
