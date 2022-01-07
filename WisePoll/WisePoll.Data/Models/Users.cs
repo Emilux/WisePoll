@@ -6,6 +6,11 @@ namespace WisePoll.Data.Models
 {
     public class Users
     {
+        public Users()
+        {
+            Members = new List<Members>();
+            Polls = new List<Polls>();
+        }
         [Key]
         public int Id { get; set; }
 
@@ -20,8 +25,9 @@ namespace WisePoll.Data.Models
         [Required]
         [StringLength(255)]
         public string Password { get; set; }
-
-        [ForeignKey("UsersId")]
-        public ICollection<Polls> Polls { get; set; }
+        
+        public List<Members> Members { get; set; }
+        
+        public List<Polls> Polls { get; set;}
     }
 }

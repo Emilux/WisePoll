@@ -12,7 +12,7 @@ namespace WisePoll.Data
 
         public DbSet<Members> Members { get; set; }
         public DbSet<Polls> Polls { get; set; }
-        public DbSet<Poll_fields> Poll_fields { get; set; }
+        public DbSet<PollFields> PollFields { get; set; }
         public DbSet<Users> Users { get; set; }
     }
 }
