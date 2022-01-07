@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WisePoll.Data.Models
 {
-    public class Poll_fields
+    public class PollFields
     {
-        public Poll_fields()
+        public PollFields()
         {
             Members = new List<Members>();
         }
