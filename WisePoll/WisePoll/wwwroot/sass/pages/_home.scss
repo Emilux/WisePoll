@@ -65,64 +65,26 @@
     .btn-primary {
         width: fit-content;
     }
+  
+    .poll-list-header{
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      margin-bottom: $base-spacing;
 
-    form > div {
-        align-items: center;
-        padding: $base-spacing;
-        margin: $base-spacing 0;
-        border: 1px solid $color-clear-grey;
-        box-shadow: $base-shadow;
-        width: 100%;
-    }
-
-    .column1 {
-        display: flex;
-        align-items: center;
+      @include media-breakpoint-up(sm) {
         justify-content: space-between;
-
-        @media (max-width: 992px) {
-
-            span {
-                &:nth-child(2) {
-                    display: none;
-                }
-            }
+        align-items: flex-end;
+        flex-direction: row;
+      }
+      &-count {
+        margin-top: $base-spacing;
+        @include media-breakpoint-up(sm) {
+          margin-top:0;
         }
-    }
-
-    .column2 {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-
-        a:first-child {
-            margin-right: $base-spacing;
-        }
-    }
-}
-
-#pagination {
-    justify-content: center;
-
-    & > li {
-        margin: $base-spacing;
-        height: 50px;
-        width: 50px;
-        background-color: $color-yellow;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 0.5;
-
-        @media (max-width: 992px) {
-
-            &:nth-child(4), &:nth-child(5) {
-                display: none;
-            }
-        }
-
-        &.active {
-            opacity: 1;
-        }
+      }
+      .btn{
+        margin-top: 0;
+      }
     }
 }

@@ -62,6 +62,7 @@ a,input[type=submit],button{
   font-weight: 600;
   color: $color-black;
   &:hover{
+    cursor: pointer;
     color: $color-purple;
     text-decoration: none;
   }
