@@ -6,111 +6,102 @@
 }
 
 <div>
-    <div class="row justify-content-between align-items-center mb-4 mb-3">
-        <p class="col-auto my-3 my-md-0">You've created 24 polls</p>
-        <a class="col-auto nav-navigation-item-link btn btn-primary my-2" asp-area="" asp-controller="Poll" asp-action="Create">Create a poll</a>
+    <div class="poll-list-header">
+        <div class="poll-list-header-count">You've created <strong>24</strong> polls</div>
+        <a class="btn btn-primary btn-icon" asp-area="" asp-controller="Poll" asp-action="Create"><i class="icon-PlusIcon"></i>Create a poll</a>
     </div>
 
-    <form>
-        
-        <div class="row justify-content-between">
-            <div class="col-lg-8 my-lg-0 mb-3">
-                <div class="column1">
-                    <a class="col-md-3">Poll title</a>
-                    <span class="col-md-6">Poll question</span>
-                    <span class="col-md-3">24 Participants</span>
-                </div>
+    <div class="poll-list-item">
+        <div class="poll-list-item-infos">
+            <a class="poll-list-item-infos-item poll-list-item-infos-title link">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+            <span class="poll-list-item-infos-item poll-list-item-infos-participants"><strong>24</strong> Participants</span>
+        </div>
+        <div class="poll-list-item-actions">
+            <a class="poll-list-item-actions-link link">View</a>
+            <a class="poll-list-item-actions-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Delete">End the poll</a>
+        </div>
+    </div>
+    
+    <div class="poll-list-item">
+        <div class="poll-list-item-infos">
+            <a class="poll-list-item-infos-item poll-list-item-infos-title link">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+            <span class="poll-list-item-infos-item poll-list-item-infos-participants"><strong>24</strong> Participants</span>
+        </div>
+        <div class="poll-list-item-actions">
+            <a class="poll-list-item-actions-link link">View</a>
+            <a class="poll-list-item-actions-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Delete">End the poll</a>
+        </div>
+    </div>
+    
+    <div class="poll-list-item">
+        <div class="poll-list-item-infos">
+            <a class="poll-list-item-infos-item poll-list-item-infos-title link">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+            <span class="poll-list-item-infos-item poll-list-item-infos-participants"><strong>24</strong> Participants</span>
+        </div>
+        <div class="poll-list-item-actions">
+            <a class="poll-list-item-actions-link link">View</a>
+            <a class="poll-list-item-actions-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Delete">End the poll</a>
+        </div>
+    </div>
+    
+    <div class="poll-list-item">
+        <div class="poll-list-item-infos">
+            <a class="poll-list-item-infos-item poll-list-item-infos-title link">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+            <span class="poll-list-item-infos-item poll-list-item-infos-participants"><strong>24</strong> Participants</span>
+        </div>
+        <div class="poll-list-item-actions">
+            <a class="poll-list-item-actions-link link">View</a>
+            <a class="poll-list-item-actions-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Delete">End the poll</a>
+        </div>
+    </div>
+    
+    <div class="poll-list-item">
+        <div class="poll-list-item-infos">
+            <a class="poll-list-item-infos-item poll-list-item-infos-title link">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+            <span class="poll-list-item-infos-item poll-list-item-infos-participants"><strong>24</strong> Participants</span>
+        </div>
+        <div class="poll-list-item-actions">
+            <a class="poll-list-item-actions-link link">View</a>
+            <a class="poll-list-item-actions-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Delete">End the poll</a>
+        </div>
+    </div>
+    
+    <div class="poll-list-item">
+        <div class="poll-list-item-infos">
+            <a class="poll-list-item-infos-item poll-list-item-infos-title link">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+            <span class="poll-list-item-infos-item poll-list-item-infos-participants"><strong>24</strong> Participants</span>
+        </div>
+        <div class="poll-list-item-actions">
+            <a class="poll-list-item-actions-link link">View</a>
+            <a class="poll-list-item-actions-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Delete">End the poll</a>
+        </div>
+    </div>
+    
+    
+    <div class="pagination">
+        <div class="active pagination-item pagination-item-left">
+            <a class="pagination-item-link pagination-item-link-left" href="#"><i class="icon-ChevronLeft"></i></a>
+        </div>
+        <div class="pagination-container">
+            <div class="active pagination-item">
+                <a class="pagination-item-link active" active href="#">1</a>
             </div>
-            <div class="col-lg-4">
-                <div class="column2"> 
-                    <a class="nav-navigation-item-link">View</a>
-                    <a class="col-auto nav-navigation-item-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Delete">End the poll</a>
-                </div>
+            <div class="pagination-item">
+                <a class="pagination-item-link" href="#">2</a>
+            </div>
+            <div class="pagination-item">
+                <a class="pagination-item-link" href="#">3</a>
+            </div>
+            <div class="pagination-item">
+                <a class="pagination-item-link" href="#">4</a>
+            </div>
+            <div class="pagination-item">
+                <a class="pagination-item-link" href="#">5</a>
             </div>
         </div>
-
-        <div class="row justify-content-between">
-            <div class="col-lg-8 my-lg-0 mb-3">
-                <div class="column1">
-                    <a class="col-md-3">Poll title</a>
-                    <span class="col-md-6">Poll question</span>
-                    <span class="col-md-3">24 Participants</span>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="column2"> 
-                    <a class="nav-navigation-item-link">View</a>
-                    <a class="col-auto nav-navigation-item-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Delete">End the poll</a>
-                </div>
-            </div>
+        <div class="pagination-item pagination-item-right">
+            <a class="pagination-item-link pagination-item-link-right" href="#"><i class="icon-ChevronRight"></i></a>
         </div>
-
-        <div class="row justify-content-between">
-            <div class="col-lg-8 my-lg-0 mb-3">
-                <div class="column1">
-                    <a class="col-md-3">Poll title</a>
-                    <span class="col-md-6">Poll question</span>
-                    <span class="col-md-3">24 Participants</span>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="column2"> 
-                    <a class="nav-navigation-item-link">View</a>
-                    <a class="col-auto nav-navigation-item-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Delete">End the poll</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="row justify-content-between">
-            <div class="col-lg-8 my-lg-0 mb-3">
-                <div class="column1">
-                    <a class="col-md-3">Poll title</a>
-                    <span class="col-md-6">Poll question</span>
-                    <span class="col-md-3">24 Participants</span>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="column2"> 
-                    <a class="nav-navigation-item-link">View</a>
-                    <a class="col-auto nav-navigation-item-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Delete">End the poll</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="row justify-content-between">
-            <div class="col-lg-8 my-lg-0 mb-3">
-                <div class="column1">
-                    <a class="col-md-3">Poll title</a>
-                    <span class="col-md-6">Poll question</span>
-                    <span class="col-md-3">24 Participants</span>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="column2"> 
-                    <a class="nav-navigation-item-link">View</a>
-                    <a class="col-auto nav-navigation-item-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Delete">End the poll</a>
-                </div>
-            </div>
-        </div>
-
-
-        <ul id="pagination" class="row m-2">
-            <li class="active">
-                <a href="#">1</a>
-            </li>
-            <li>
-                <a href="#">2</a>
-            </li>
-            <li>
-                <a href="#">3</a>
-            </li>
-            <li>
-                <a href="#">4</a>
-            </li>
-            <li>
-                <a href="#">5</a>
-            </li>
-        </ul>
-    </form>
-
+    </div>
+    
 </div>

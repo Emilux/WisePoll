@@ -1,0 +1,78 @@
+.poll-list{
+  &-item{
+    box-shadow: $s-shadow;
+    padding: $s-spacing;
+    margin-top: $s-spacing;
+    &:first-of-type{
+      margin-top: 0;
+    }
+    @include media-breakpoint-up(sm) {
+      padding: $base-spacing;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &-infos{
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      @include media-breakpoint-up(sm) {
+        max-width: 50%;
+      }
+      @include media-breakpoint-up(md) {
+        max-width: 60%;
+      }
+      &-item{
+        margin-top: $base-spacing;
+        &:first-child{
+          margin-top: 0;
+        }
+        @include media-breakpoint-up(md) {
+          margin-right: $s-spacing;
+          margin-top:0;
+          &:last-child{
+            margin-right: 0;
+          }
+        }
+      }
+      @include media-breakpoint-up(md) {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+    &-actions{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: $base-spacing;
+
+      @media screen and (min-width: 350px) {
+        flex-direction: row;
+        justify-content: flex-end;
+      }
+      @include media-breakpoint-up(sm) {
+        padding-top: 0;
+        justify-content: center;
+      }
+      &-link{
+        margin-left: 0;
+        margin-top: $base-spacing;
+        &:first-of-type{
+          margin-top: 0;
+        }
+        &.btn{
+          margin-top: $base-spacing;
+        }
+        @media screen and (min-width: 350px) {
+          margin-left: $base-spacing;
+          margin-top: 0;
+          &.btn{
+            margin-top: 0;
+          }
+        }
+
+      }
+    }
+  }
+}

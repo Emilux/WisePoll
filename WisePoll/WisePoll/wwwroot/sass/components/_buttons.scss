@@ -7,6 +7,20 @@
   display: inline-block;
   transition: background-color 200ms,color 200ms;
   margin-top: $m-spacing;
+  &-icon{
+    padding-left: $si-spacing;
+    display: flex;
+    align-items: center;
+    i{
+      margin-right: $base-spacing;
+    }
+    &-revert{
+      i{
+        margin-right:0;
+        margin-left: $base-spacing;
+      }
+    }
+  }
   &-center{
     text-align: center;
   }
