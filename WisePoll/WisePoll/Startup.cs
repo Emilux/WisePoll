@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,7 +43,8 @@ namespace WisePoll
                     config.SlidingExpiration = true;
                     config.Cookie.IsEssential = true;
                 });
-
+            
+            services.AddScoped<IPollsRepository, PollsRepository>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
