@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WisePoll.Data;
+using WisePoll.Data.Repositories;
+using WisePoll.Services;
 
 namespace WisePoll
 {
@@ -21,6 +23,8 @@ namespace WisePoll
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            //BDD connect
             var cn = Configuration.GetConnectionString("mainDb");
             var serverVersion = new MySqlServerVersion(ServerVersion.AutoDetect(cn));
             services.AddDbContext<ApplicationDbContext>(
@@ -28,6 +32,10 @@ namespace WisePoll
                 {
                     builder.UseMySql(cn, serverVersion);
                 });
+
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

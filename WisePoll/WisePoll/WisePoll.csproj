@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WisePoll.Data\WisePoll.Data.csproj" />
+    <ProjectReference Include="..\WisePoll.Services\WisePoll.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
