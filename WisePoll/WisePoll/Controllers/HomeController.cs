@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using WisePoll.Models;
@@ -27,6 +28,7 @@ namespace WisePoll.Controllers
             
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();

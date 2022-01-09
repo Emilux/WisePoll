@@ -35,9 +35,52 @@ namespace WisePoll.Controllers
                 return View(model);
             }
 
-            await _authService.RegisterAsync(model);
+            var user = new Users()
+            {
+                Pseudo = model.Pseudo,
+                Email = model.Email,
+                Password = model.Password
+            };
+
+            if (_authService.CheckSingleEmail(user) != null)
+            {
+                return View(model);
+            }
+
+            await _authService.RegisterAsync(user);
 
             return RedirectToAction("index", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(AuthLoginViewModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var user = new Users()
+                {
+                    Email = model.Email,
+                    Password = model.Password,
+                };
+
+                bool StayLog = model.StayLog;
+
+                var result = await _authService.AuthenticateAsync(user, StayLog);
+                if (result)
+                {
+                    if (string.IsNullOrEmpty(returnUrl))
+                    {
+                        return RedirectToAction("index", "Home");
+                    }
+                    else
+                    {
+                        return Redirect(returnUrl);
+                    }
+                }
+            }
+            ModelState.AddModelError("", "Invalid Email or Password");
+            return View(model);
         }
     }
 }
