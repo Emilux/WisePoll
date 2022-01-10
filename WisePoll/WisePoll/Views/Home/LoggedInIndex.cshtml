@@ -4,80 +4,28 @@
     ViewData["Subtitle"] = "Your polls";
     ViewData["Class"] = "LoggedHome";
 }
+@model IEnumerable<WisePoll.Services.ViewModels.HomeIndexViewModel>
 
 <div>
     <div class="poll-list-header">
-        <div class="poll-list-header-count">You've created <strong>24</strong> polls</div>
+        <div class="poll-list-header-count">You've created <strong>@Model.Count()</strong> poll@(Model.Count() > 1 ? "s" : "" ) </div>
         <a class="btn btn-primary btn-icon" asp-area="" asp-controller="Poll" asp-action="Create"><i class="icon-PlusIcon"></i>Create a poll</a>
     </div>
+    @foreach (var p in Model)
+    {
+        <div class="poll-list-item">
+            Active : @p.Is_active
+            <div class="poll-list-item-infos">
+                <a class="poll-list-item-infos-item poll-list-item-infos-title link">@p.Title</a>
+                <span class="poll-list-item-infos-item poll-list-item-infos-participants"><strong>@p.Members.Count</strong> Participant@(p.Members.Count > 1 ? "s" : "")</span>
+            </div>
+            <div class="poll-list-item-actions">
+                <a class="poll-list-item-actions-link link" asp-controller="Poll" asp-action="Vote" asp-route-id="@p.Id">View</a>
+                <a class="poll-list-item-actions-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Desactivate" asp-route-id="@p.Id">End the poll</a>
+            </div>
+        </div>
+    }
 
-    <div class="poll-list-item">
-        <div class="poll-list-item-infos">
-            <a class="poll-list-item-infos-item poll-list-item-infos-title link">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
-            <span class="poll-list-item-infos-item poll-list-item-infos-participants"><strong>24</strong> Participants</span>
-        </div>
-        <div class="poll-list-item-actions">
-            <a class="poll-list-item-actions-link link">View</a>
-            <a class="poll-list-item-actions-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Delete">End the poll</a>
-        </div>
-    </div>
-    
-    <div class="poll-list-item">
-        <div class="poll-list-item-infos">
-            <a class="poll-list-item-infos-item poll-list-item-infos-title link">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
-            <span class="poll-list-item-infos-item poll-list-item-infos-participants"><strong>24</strong> Participants</span>
-        </div>
-        <div class="poll-list-item-actions">
-            <a class="poll-list-item-actions-link link">View</a>
-            <a class="poll-list-item-actions-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Delete">End the poll</a>
-        </div>
-    </div>
-    
-    <div class="poll-list-item">
-        <div class="poll-list-item-infos">
-            <a class="poll-list-item-infos-item poll-list-item-infos-title link">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
-            <span class="poll-list-item-infos-item poll-list-item-infos-participants"><strong>24</strong> Participants</span>
-        </div>
-        <div class="poll-list-item-actions">
-            <a class="poll-list-item-actions-link link">View</a>
-            <a class="poll-list-item-actions-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Delete">End the poll</a>
-        </div>
-    </div>
-    
-    <div class="poll-list-item">
-        <div class="poll-list-item-infos">
-            <a class="poll-list-item-infos-item poll-list-item-infos-title link">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
-            <span class="poll-list-item-infos-item poll-list-item-infos-participants"><strong>24</strong> Participants</span>
-        </div>
-        <div class="poll-list-item-actions">
-            <a class="poll-list-item-actions-link link">View</a>
-            <a class="poll-list-item-actions-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Delete">End the poll</a>
-        </div>
-    </div>
-    
-    <div class="poll-list-item">
-        <div class="poll-list-item-infos">
-            <a class="poll-list-item-infos-item poll-list-item-infos-title link">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
-            <span class="poll-list-item-infos-item poll-list-item-infos-participants"><strong>24</strong> Participants</span>
-        </div>
-        <div class="poll-list-item-actions">
-            <a class="poll-list-item-actions-link link">View</a>
-            <a class="poll-list-item-actions-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Delete">End the poll</a>
-        </div>
-    </div>
-    
-    <div class="poll-list-item">
-        <div class="poll-list-item-infos">
-            <a class="poll-list-item-infos-item poll-list-item-infos-title link">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
-            <span class="poll-list-item-infos-item poll-list-item-infos-participants"><strong>24</strong> Participants</span>
-        </div>
-        <div class="poll-list-item-actions">
-            <a class="poll-list-item-actions-link link">View</a>
-            <a class="poll-list-item-actions-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Delete">End the poll</a>
-        </div>
-    </div>
-    
-    
     <div class="pagination">
         <div class="active pagination-item pagination-item-left">
             <a class="pagination-item-link pagination-item-link-left" href="#"><i class="icon-ChevronLeft"></i></a>
