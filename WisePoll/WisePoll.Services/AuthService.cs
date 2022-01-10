@@ -64,7 +64,7 @@ namespace WisePoll.Services
                     var claims = new List<Claim> {
                         new Claim(ClaimTypes.Name, FoundUser.Pseudo),
                         new Claim(ClaimTypes.Email, FoundUser.Email),
-                        new Claim("Role", "User")
+                        new Claim(ClaimTypes.Role, "User")
                     };
 
                     var identity = new ClaimsIdentity(claims, "Cookies");
