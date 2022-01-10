@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading.Tasks;
 
 namespace WisePoll.Data.Models
 {
@@ -29,5 +31,7 @@ namespace WisePoll.Data.Models
         public List<Members> Members { get; set; }
         
         public List<Polls> Polls { get; set;}
+
+
     }
 }

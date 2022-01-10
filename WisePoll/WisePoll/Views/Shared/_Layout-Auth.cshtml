@@ -21,7 +21,7 @@
         <div class="wisepuddle wisepuddle-bottom-left"></div>
     </div>
     <div class="auth-form">
-        <form class="form">
+        <form class="form" asp-action="@ViewData["asp-actionForm"]">
             @RenderBody()
             <div class="auth-form-submit">
                 <input type="submit" class="btn btn-primary" value="@ViewData["SubmitValue"]">

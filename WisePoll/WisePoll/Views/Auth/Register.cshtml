@@ -1,30 +1,35 @@
+@model WisePoll.Services.ViewModels.AuthRegisterViewModel
+
 @{
     ViewData["Title"] = "Login Page";
     ViewData["Class"] = "auth";
     ViewData["SubmitValue"] = "Create account";
+    ViewData["asp-actionForm"] = "Register";
     Layout = "_Layout-Auth";
 }
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<div class="form-group">
-    <label class="form-label" for="email">E-mail :</label>
-    <input class="form-field" id="email" type="text" name="login" placeholder="login">
-</div>
+    <div class="form-group">
+        <label class="form-label" asp-for="Email">E-mail :</label>
+        <input class="form-field" id="email" type="text" asp-for="Email" placeholder="login">
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
 
-<div class="form-group">
-    <label class="form-label" for="pseudo">Pseudo</label>
-    <input class="form-field" id="pseudo" type="text" name="pseudo" placeholder="Pseudo">
-</div>
+    <div class="form-group">
+        <label class="form-label" asp-for="Pseudo">Pseudo</label>
+        <input class="form-field" id="pseudo" type="text" asp-for="Pseudo" placeholder="Pseudo">
+    </div>
 
-<div class="form-group">
-    <label class="form-label" for="password">Password :</label>
-    <input class="form-field" id="password" type="text" name="password" placeholder="password">
-</div>
+    <div class="form-group">
+        <label class="form-label" asp-for="Password">Password :</label>
+        <input class="form-field" id="password" type="text" asp-for="Password" placeholder="password">
+    </div>
 
-<div class="form-group">
-    <label class="form-label" for="confirm_password">Confirm Password :</label>
-    <input class="form-field" type="text" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
-</div>
+    <div class="form-group">
+        <label class="form-label" asp-for="ConfirmPassword">Confirm Password :</label>
+        <input class="form-field" type="text" id="ConfirmPassword" asp-for="ConfirmPassword" placeholder="Confirm Password">
+    </div>
 
-@section RedirectButton{
-    <div class="register-now-link">Already Registered ? <a class="link link-primary link-underline" asp-area="" asp-controller="Auth" asp-action="Login">Log In</a></div>
-}
+    @section RedirectButton{
+        <div class="register-now-link">Already Registered ? <a class="link link-primary link-underline" asp-area="" asp-controller="Auth" asp-action="Login">Log In</a></div>
+    }
