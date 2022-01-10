@@ -1,25 +1,33 @@
+@model WisePoll.Services.ViewModels.AuthLoginViewModel
+
 @{
     ViewData["Title"] = "Login Page";
     ViewData["Class"] = "auth";
+    ViewData["asp-actionForm"] = "Login";
     ViewData["SubmitValue"] = "Log In";
     Layout = "_Layout-Auth";
+
+    var url = Context.Request.Query["returnUrl"];
 }
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 <div class="form-group">
-    <label class="form-label" for="email">E-mail :</label>
-    <input class="form-field" id="email" type="text" name="login" placeholder="login">
+    <label asp-for="Email" class="form-label">E-mail :</label>
+    <input asp-for="Email" type="text" class="form-field" id="email" placeholder="Email">
+    <span asp-validation-for="Email" data-valmsg-for="Email" data-valmsg-replace="true"></span>
 </div>
 
 <div class="form-group">
     <div class="form-label">
-        <label class="" for="password">Password :</label>
+        <label asp-for="Password">Password :</label>
         <a class="link link-primary link-underline" href="#">Forgot password ?</a>
     </div>
-    <input class="form-field" id="password" type="text" name="password" placeholder="password">
+    <input type="text" asp-for="Password" class="form-field" id="password" placeholder="password">
+    <span asp-validation-for="Password" data-valmsg-for="Password" data-valmsg-replace="true"></span>
 </div>
 
 
 <div class="form-check">
-    <input class="form-field" id="StayLog" type="checkbox" name="StayLog"/>
-    <label class="form-label form-label-check" for="StayLog">Stay Logged In ?</label>
+    <input class="form-field" id="StayLog" type="checkbox" asp-for="StayLog"/>
+    <label class="form-label form-label-check" asp-for="StayLog">Stay Logged In ?</label>
 </div>

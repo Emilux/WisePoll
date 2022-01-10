@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using WisePoll.Data;
 using WisePoll.Data.Repositories;
 using WisePoll.Services;
@@ -22,8 +24,6 @@ namespace WisePoll
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-
             //BDD connect
             var cn = Configuration.GetConnectionString("mainDb");
             var serverVersion = new MySqlServerVersion(ServerVersion.AutoDetect(cn));
@@ -33,9 +33,25 @@ namespace WisePoll
                     builder.UseMySql(cn, serverVersion);
                 });
 
+            services.AddHttpContextAccessor();
+
+            services.AddAuthentication("Cookies")
+                .AddCookie("Cookies", config =>
+                {
+                    config.LoginPath = "/auth/login";
+                    config.LogoutPath = "/auth/logout";
+                    config.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                    config.SlidingExpiration = true;
+                    config.Cookie.IsEssential = true;
+                });
+
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +71,8 @@ namespace WisePoll
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -10,7 +10,8 @@ namespace WisePoll.Services
 {
     public interface IAuthService
     {
-        bool VerifyUniqueEmail(AuthRegisterViewModel model);
-        Task RegisterAsync(AuthRegisterViewModel model);
+        Task RegisterAsync(Users user);
+        Task<bool> AuthenticateAsync(Users users, bool StayLog);
+        Users GetUserByMail(Users user);
     }
 }

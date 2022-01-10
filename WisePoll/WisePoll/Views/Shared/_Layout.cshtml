@@ -13,7 +13,12 @@
 </head>
 <body class="@ViewData["Class"]">
 @{/* @todo check if user is logged and show loggedinnav */}
-<partial name="_navigation"/>
+@if (User.Identity.IsAuthenticated){
+        <partial name="_LoggedNav"/>
+    } else
+    {
+        <partial name="_navigation"/>
+    }
 
 
 @if (IsSectionDefined("header"))

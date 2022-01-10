@@ -9,6 +9,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using WisePoll.Data.Models;
+using Identity.PasswordHasher;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace WisePoll.Services
 {
@@ -16,42 +18,70 @@ namespace WisePoll.Services
     {
 
         private readonly IUsersRepository _repo;
-        public AuthService(IUsersRepository db)
+        private readonly HttpContext _httpContext;
+        public AuthService(IUsersRepository db, IHttpContextAccessor contextAccessor)
         {            
             _repo = db;
+            _httpContext = contextAccessor.HttpContext;
         }
 
-        public async Task RegisterAsync(AuthRegisterViewModel model)
+        public async Task RegisterAsync(Users user)
         {
+            var rawPassword = user.Password;
 
-            var user = new Users()
-            {
-                Pseudo = model.Pseudo,
-                Email = model.Email,
-                Password = model.Password,
-            };
+            //Password hash with Identity.PasswordHash
+            var passwordHasher = new PasswordHasher();
+            string PasswordHash = passwordHasher.HashPassword(user.Password);
+
+            user.Password = PasswordHash;
 
             await _repo.RegisterAsync(user);
-
         }
 
 
-        public bool VerifyUniqueEmail(AuthRegisterViewModel model)
+        public Users GetUserByMail(Users user)
         {
-            var user = new Users()
-            {
-                Pseudo = model.Pseudo,
-                Email = model.Email,
-                Password = model.Password,
-            };
-
             Users result = _repo.FindUserByEmail(user);
 
-            if (result == null)
+            return result;
+        }
+
+
+        public async Task<bool> AuthenticateAsync(Users users, bool StayLog)
+        {
+            var FoundUser = GetUserByMail(users);
+
+            // Search a user with the same Email
+            if (FoundUser != null)
             {
-                return false;
+
+                //Password hash with Identity.PasswordHash
+                var passwordHasher = new PasswordHasher();
+
+                // Compare passwords
+                if (passwordHasher.VerifyHashedPassword(FoundUser.Password, users.Password))
+                {
+                    var claims = new List<Claim> {
+                        new Claim(ClaimTypes.Name, FoundUser.Pseudo),
+                        new Claim(ClaimTypes.Email, FoundUser.Email),
+                        new Claim("Role", "User")
+                    };
+
+                    var identity = new ClaimsIdentity(claims, "Cookies");
+                    var principal = new ClaimsPrincipal(identity);
+
+                    var properties = new AuthenticationProperties()
+                    {
+                        IsPersistent = StayLog
+                    };
+
+                    await _httpContext.SignInAsync(
+                        "Cookies", principal, properties);
+                    return true;
+                }
             }
-            return true;
+
+            return false;
         }
     }
 }

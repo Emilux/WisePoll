@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WisePoll.Data.Models;
 using WisePoll.Data.Repositories;
@@ -27,6 +28,19 @@ namespace WisePoll.Controllers
             return View();
         }
 
+        public IActionResult Logout()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                HttpContext.SignOutAsync();
+            }
+            else
+            {
+                return Unauthorized();
+            }
+            return RedirectToAction("index", "Home");
+        }
+
         [HttpPost]
         public async Task<IActionResult> RegisterAsync(AuthRegisterViewModel model)
         {
@@ -35,9 +49,60 @@ namespace WisePoll.Controllers
                 return View(model);
             }
 
-            await _authService.RegisterAsync(model);
+            var user = new Users()
+            {
+                Pseudo = model.Pseudo,
+                Email = model.Email,
+                Password = model.Password
+            };
+
+            if (_authService.GetUserByMail(user) != null)
+            {
+                ModelState.AddModelError("email", "Email is all ready used");
+                return View(model);
+            }
+
+            await _authService.RegisterAsync(user);
+
+            await Login(new AuthLoginViewModel
+            {
+                Email = model.Email,
+                Password = model.Password,
+                StayLog = false
+            }, null) ;
 
             return RedirectToAction("index", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(AuthLoginViewModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var user = new Users()
+                {
+                    Email = model.Email,
+                    Password = model.Password,
+                };
+
+                bool StayLog = model.StayLog;
+
+                var result = await _authService.AuthenticateAsync(user, StayLog);
+                if (result)
+                {
+                    if (string.IsNullOrEmpty(returnUrl))
+                    {
+                        return RedirectToAction("index", "Home");
+                    }
+                    else
+                    {
+                        return Redirect(returnUrl);
+                    }
+                }
+            }
+            ModelState.AddModelError("", "Invalid Email or Password");
+            return View(model);
         }
     }
 }
