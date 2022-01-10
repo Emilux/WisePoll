@@ -72,7 +72,7 @@ namespace WisePoll.Services
 
                     var properties = new AuthenticationProperties()
                     {
-                        IsPersistent = StayLog
+                        IsPersistent = StayLog,
                     };
 
                     await _httpContext.SignInAsync(

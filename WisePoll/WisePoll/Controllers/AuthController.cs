@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WisePoll.Data.Models;
@@ -17,33 +18,41 @@ namespace WisePoll.Controllers
             _authService = service;
         }
 
-
         public IActionResult Login()
-        {
-            return View();
-        }
-
-        public IActionResult Register()
-        {
-            return View();
-        }
-
-        public IActionResult Logout()
         {
             if (User.Identity.IsAuthenticated)
             {
-                HttpContext.SignOutAsync();
+                return RedirectToAction("index", "Home");
             }
-            else
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult Register()
+        {
+            if (User.Identity.IsAuthenticated)
             {
-                return Unauthorized();
+                return RedirectToAction("index", "Home");
             }
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult Logout()
+        {
+            HttpContext.SignOutAsync();
+
             return RedirectToAction("index", "Home");
         }
 
         [HttpPost]
         public async Task<IActionResult> RegisterAsync(AuthRegisterViewModel model)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("index", "Home");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -77,6 +86,11 @@ namespace WisePoll.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(AuthLoginViewModel model, string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("index", "Home");
+            }
+
             if (ModelState.IsValid)
             {
 

@@ -17,10 +17,9 @@ namespace WisePoll.Controllers
 
         public IActionResult Index()
         {
-            bool loggedIn = false;
-            if (loggedIn)
+            if (User.Identity.IsAuthenticated)
             {
-                return View("LoggedInIndex", loggedIn);
+                return View("LoggedInIndex");
             } else
             {
                 return View();
@@ -28,7 +27,6 @@ namespace WisePoll.Controllers
             
         }
 
-        [Authorize]
         public IActionResult Privacy()
         {
             return View();
