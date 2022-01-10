@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WisePoll.Data.Models;
 using Identity.PasswordHasher;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace WisePoll.Services
 {
@@ -26,6 +27,8 @@ namespace WisePoll.Services
 
         public async Task RegisterAsync(Users user)
         {
+            var rawPassword = user.Password;
+
             //Password hash with Identity.PasswordHash
             var passwordHasher = new PasswordHasher();
             string PasswordHash = passwordHasher.HashPassword(user.Password);
@@ -33,11 +36,10 @@ namespace WisePoll.Services
             user.Password = PasswordHash;
 
             await _repo.RegisterAsync(user);
-
         }
 
 
-        public Users CheckSingleEmail(Users user)
+        public Users GetUserByMail(Users user)
         {
             Users result = _repo.FindUserByEmail(user);
 
@@ -47,7 +49,7 @@ namespace WisePoll.Services
 
         public async Task<bool> AuthenticateAsync(Users users, bool StayLog)
         {
-            var FoundUser = CheckSingleEmail(users);
+            var FoundUser = GetUserByMail(users);
 
             // Search a user with the same Email
             if (FoundUser != null)
@@ -59,12 +61,10 @@ namespace WisePoll.Services
                 // Compare passwords
                 if (passwordHasher.VerifyHashedPassword(FoundUser.Password, users.Password))
                 {
-
-                    var claims = new List<Claim>()
-                    {
-                        new Claim("Name", users.Pseudo),
-                        new Claim("Email", users.Email),
-                        new Claim("Role", "User"),
+                    var claims = new List<Claim> {
+                        new Claim(ClaimTypes.Name, FoundUser.Pseudo),
+                        new Claim(ClaimTypes.Email, FoundUser.Email),
+                        new Claim("Role", "User")
                     };
 
                     var identity = new ClaimsIdentity(claims, "Cookies");

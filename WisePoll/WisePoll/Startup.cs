@@ -39,7 +39,7 @@ namespace WisePoll
                 .AddCookie("Cookies", config =>
                 {
                     config.LoginPath = "/auth/login";
-                    config.LogoutPath = "/auth/disconnect";
+                    config.LogoutPath = "/auth/logout";
                     config.ExpireTimeSpan = TimeSpan.FromMinutes(60);
                     config.SlidingExpiration = true;
                     config.Cookie.IsEssential = true;
@@ -52,7 +52,6 @@ namespace WisePoll
 
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,7 +71,8 @@ namespace WisePoll
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

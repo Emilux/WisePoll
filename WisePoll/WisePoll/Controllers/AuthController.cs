@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WisePoll.Data.Models;
 using WisePoll.Data.Repositories;
@@ -27,6 +28,19 @@ namespace WisePoll.Controllers
             return View();
         }
 
+        public IActionResult Logout()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                HttpContext.SignOutAsync();
+            }
+            else
+            {
+                return Unauthorized();
+            }
+            return RedirectToAction("index", "Home");
+        }
+
         [HttpPost]
         public async Task<IActionResult> RegisterAsync(AuthRegisterViewModel model)
         {
@@ -42,12 +56,20 @@ namespace WisePoll.Controllers
                 Password = model.Password
             };
 
-            if (_authService.CheckSingleEmail(user) != null)
+            if (_authService.GetUserByMail(user) != null)
             {
+                ModelState.AddModelError("email", "Email is all ready used");
                 return View(model);
             }
 
             await _authService.RegisterAsync(user);
+
+            await Login(new AuthLoginViewModel
+            {
+                Email = model.Email,
+                Password = model.Password,
+                StayLog = false
+            }, null) ;
 
             return RedirectToAction("index", "Home");
         }

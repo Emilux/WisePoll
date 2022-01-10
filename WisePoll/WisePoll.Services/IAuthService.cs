@@ -12,6 +12,6 @@ namespace WisePoll.Services
     {
         Task RegisterAsync(Users user);
         Task<bool> AuthenticateAsync(Users users, bool StayLog);
-        Users CheckSingleEmail(Users user);
+        Users GetUserByMail(Users user);
     }
 }

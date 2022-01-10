@@ -9,6 +9,7 @@ namespace WisePoll.Services.ViewModels
 {
     public class AuthRegisterViewModel
     {
+        private const string V = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
 
         [Required(ErrorMessage = "Email is required or already used")]
         [EmailAddress]
@@ -22,7 +23,9 @@ namespace WisePoll.Services.ViewModels
 
         [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]
-        [MinLength(8, ErrorMessage = "Password with a minimum length of '8 character")]
+        [RegularExpression(V, ErrorMessage = "Password with minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character")]
+        [MinLength(8, ErrorMessage = "Password with a minimum length of 8 character")]
+        [MaxLength(50, ErrorMessage = "Password with a maximum length of 50 character")]
         public string Password { get; set; }
 
 

@@ -16,7 +16,6 @@ namespace WisePoll.Services.ViewModels
 
         [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]
-        [MinLength(8, ErrorMessage = "Password with a minimum length of '8 character")]
         public string Password { get; set; }
 
         public bool StayLog { get; set;}

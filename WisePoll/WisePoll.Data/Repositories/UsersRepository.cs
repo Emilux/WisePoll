@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using WisePoll.Data;
+using System.Security.Claims;
+using System.Net.Http;
 
 namespace WisePoll.Data.Repositories
 {
@@ -22,6 +23,7 @@ namespace WisePoll.Data.Repositories
                 throw new ArgumentNullException(nameof(user));
 
             await _context.Users.AddAsync(user);
+            
             await _context.SaveChangesAsync();
 
         }
