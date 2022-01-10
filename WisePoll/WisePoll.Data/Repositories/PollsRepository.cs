@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -20,16 +22,28 @@ namespace WisePoll.Data.Repositories
 
         public Task<List<Polls>> GetAllAsync()
         {
-            return _context.Polls.ToListAsync();
+            return _context.Polls
+                .Include(m => m.Members)
+                .ToListAsync();
+        }
+        
+        public Task<List<Polls>> GetAllByUserIdAsync(int userId)
+        {
+            return _context.Polls
+                .Include(m => m.Members)
+                .Where(m => m.UsersId == userId)
+                .ToListAsync();
         }
 
         public Task<Polls> GetAsync(int id)
-            => _context.Polls.FirstOrDefaultAsync(m => m.Id == id);
+            => _context.Polls
+                .Include(m => m.PollFields)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
         public async Task AddAsync(Polls polls)
         {
             if (polls == null)
-                throw new ArgumentException(nameof(polls));
+                throw new ArgumentException(null, nameof(polls));
             
             await _context.Polls.AddAsync(polls);
             await _context.SaveChangesAsync();
@@ -40,9 +54,9 @@ namespace WisePoll.Data.Repositories
             if (id <= 0)
                 throw new ArgumentNullException(nameof(id));
             
-            Polls Poll = new() {Id = id};
+            Polls poll = new() {Id = id};
             
-            _context.Polls.Remove(Poll);
+            _context.Polls.Remove(poll);
             await _context.SaveChangesAsync();
         }
 
@@ -50,8 +64,17 @@ namespace WisePoll.Data.Repositories
         {
             if (polls is not {Id: > 0} )
                 throw new ArgumentNullException(nameof(polls));
-            
+
             _context.Polls.Update(polls);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(Polls polls, List<string> properties)
+        {
+            foreach (var p in properties)
+            {
+                _context.Entry(polls).Property(p).IsModified = true;
+            }
             await _context.SaveChangesAsync();
         }
     }

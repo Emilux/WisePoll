@@ -18,8 +18,8 @@ namespace WisePoll.Data.Models
         [StringLength(255)]
         public string Email { get; set; }
 
-        public List<Polls> Polls { get; set; }
+        public ICollection<Polls> Polls { get; set; }
         
-        public List<PollFields> PollFields { get; set; }
+        public ICollection<PollFields> PollFields { get; set; }
     }
 }

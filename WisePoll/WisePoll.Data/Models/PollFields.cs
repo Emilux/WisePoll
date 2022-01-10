@@ -16,9 +16,6 @@ namespace WisePoll.Data.Models
         [StringLength(255)]
         public string Label { get; set; }
 
-        [Required]
-        public int PollsId { get; set; }
-
         public List<Members> Members { get; set; }
     }
 }

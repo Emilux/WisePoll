@@ -1,10 +1,13 @@
 #PollVote {
+    text-align: center;
     .form {
         div {
             display: flex;
             align-items: center;
         }
-
+        .form-check{
+            justify-content: center;
+        }
         form-field[type=checkbox] {
             width: 40px;
             height: 40px;

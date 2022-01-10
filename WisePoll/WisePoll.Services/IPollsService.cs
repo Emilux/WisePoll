@@ -6,6 +6,9 @@ namespace WisePoll.Services
 {
     public interface IPollsService
     {
-        Task<IEnumerable<HomeIndexViewModel>> GetAllAsync();
+        Task<IEnumerable<HomeIndexViewModel>> GetAllByUserIdAsync(int userId);
+        Task DesactivatePollAsync(int id);
+        Task CreatePollAsync(CreatePollViewModel model);
+        Task<VotePollViewModel> GetAsync(int id);
     }
 }

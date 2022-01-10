@@ -3,9 +3,8 @@ using WisePoll.Data.Models;
 
 namespace WisePoll.Services.ViewModels
 {
-    public class HomeIndexViewModel
+    public class VotePollViewModel
     {
-        
         public int Id { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }

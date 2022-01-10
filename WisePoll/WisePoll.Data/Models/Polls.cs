@@ -28,10 +28,8 @@ namespace WisePoll.Data.Models
 
         [DefaultValue(1)]
         public bool Is_active { get; set; }
-
-        [Required]
-        public int UsersId { get; set; }
         
+        public int UsersId { get; set; }
         public List<PollFields> PollFields { get; set;}
         public List<Members> Members { get; set; }
 

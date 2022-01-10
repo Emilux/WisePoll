@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Microsoft.Extensions.Logging;
 using WisePoll.Data;
 using WisePoll.Data.Repositories;
 using WisePoll.Services;
@@ -29,7 +30,15 @@ namespace WisePoll
             services.AddDbContext<ApplicationDbContext>(
                 builder =>
                 {
-                    builder.UseMySql(cn, serverVersion);
+                    builder
+                        .UseMySql(cn, serverVersion)
+#if DEBUG
+                        .LogTo(Console.WriteLine, LogLevel.Information)
+                        .EnableSensitiveDataLogging()
+                        .EnableDetailedErrors();
+#endif
+                        ;
+                    
                 });
 
             services.AddHttpContextAccessor();
@@ -45,6 +54,7 @@ namespace WisePoll
                 });
             
             services.AddScoped<IPollsRepository, PollsRepository>();
+            services.AddScoped<IPollsService, PollsService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
