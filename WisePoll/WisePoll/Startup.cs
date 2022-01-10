@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using WisePoll.Data;
 using WisePoll.Data.Repositories;
