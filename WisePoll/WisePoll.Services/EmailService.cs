@@ -13,55 +13,44 @@ using Identity.PasswordHasher;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Net.Mail;
 using System.Net;
+using Microsoft.Extensions.Configuration;
 
 namespace WisePoll.Services
 {
     public class EmailService : IEmailService
     {
-
-        public void SendMail()
+        public EmailService(IConfiguration configuration)
         {
-            string to = "stevevonnegri@gmail.com"; //To address
-            string from = "WisepollProjet@outlook.com"; //From address
+            Configuration = configuration;
+        }
 
-            MailMessage message = new MailMessage(from, to);
+        public IConfiguration Configuration { get; }
 
-            message.Subject = "Sending Email Using Asp.Net & C#";
-            message.Body = "In this article you will learn how to send a email using Asp.Net & C#";
+        public void SendMail(string toMail, string Subject, string Body)
+        {
+
+            string to = toMail;
+
+            string from = Configuration["ConnectionMail:mailfrom"];
+            string mdpMail = Configuration["ConnectionMail:passwordmail"];
+
+            MailMessage message = new();
+            message.From = new MailAddress(from);
+            message.CC.Add(from);
+            message.Bcc.Add(to);
+
+            message.Subject = Subject;
+            message.Body = Body;
             message.BodyEncoding = Encoding.UTF8;
             message.IsBodyHtml = true;
 
-            SmtpClient client = new SmtpClient("smtp.live.com", 587);
-            System.Net.NetworkCredential basicCredential1 = new
-                System.Net.NetworkCredential("WisepollProjet@outlook.com", "WisePoll123");
+            SmtpClient client = new SmtpClient("smtp.live.com", 25);
+                NetworkCredential basicCredential1 = new
+                    (from, mdpMail);
 
             client.EnableSsl = true;
             client.UseDefaultCredentials = false;
             client.Credentials = basicCredential1;
-
-            client.Send(message);
-        }
-
-        public void SendMail1()
-        {
-            string to = "stevevonnegri@gmail.com"; //To address    
-            string from = "anaanacci@outlook.fr"; //From address    
-            MailMessage message = new MailMessage(from, to);
-
-            string mailbody = "In this article you will learn how to send a email using Asp.Net & C#";
-            message.Subject = "Sending Email Using Asp.Net & C#";
-            message.Body = mailbody;
-            message.BodyEncoding = Encoding.UTF8;
-            message.IsBodyHtml = true;
-
-
-            SmtpClient client = new SmtpClient("smtp.office365.com", 587);
-
-            System.Net.NetworkCredential basicCredential1 = new
-                            System.Net.NetworkCredential("wisepollprojet@outlook.com", "WisePoll123");
-
-            client.EnableSsl = true;
-            client.UseDefaultCredentials = false;
 
             try
             {

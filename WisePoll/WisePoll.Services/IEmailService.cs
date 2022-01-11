@@ -8,7 +8,6 @@ namespace WisePoll.Services
 {
     public interface IEmailService
     {
-        void SendMail();
-        void SendMail1();
+        void SendMail(string toMail, string Subject, string Body);
     }
 }

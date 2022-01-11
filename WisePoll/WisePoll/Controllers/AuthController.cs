@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WisePoll.Data.Models;
-using WisePoll.Data.Repositories;
 using WisePoll.Services;
 using WisePoll.Services.ViewModels;
 
@@ -12,12 +11,10 @@ namespace WisePoll.Controllers
     public class AuthController : Controller
     {
         private readonly IAuthService _authService;
-        private readonly IEmailService _mailService;
 
-        public AuthController(IAuthService authservice, IEmailService emailService)
+        public AuthController(IAuthService authservice)
         {
             _authService = authservice;
-            _mailService = emailService;
         }
 
         public IActionResult Login()
@@ -80,8 +77,6 @@ namespace WisePoll.Controllers
                 Password = model.Password,
                 StayLog = false
             }, null) ;
-
-            _mailService.SendMail();
 
             return RedirectToAction("index", "Home");
         }
