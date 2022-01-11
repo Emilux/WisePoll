@@ -47,6 +47,7 @@ namespace WisePoll
 
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IEmailService, EmailService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 

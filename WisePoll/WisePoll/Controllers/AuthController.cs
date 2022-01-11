@@ -12,10 +12,12 @@ namespace WisePoll.Controllers
     public class AuthController : Controller
     {
         private readonly IAuthService _authService;
+        private readonly IEmailService _mailService;
 
-        public AuthController(IAuthService service)
+        public AuthController(IAuthService authservice, IEmailService emailService)
         {
-            _authService = service;
+            _authService = authservice;
+            _mailService = emailService;
         }
 
         public IActionResult Login()
@@ -27,7 +29,6 @@ namespace WisePoll.Controllers
             return View();
         }
 
-        [Authorize]
         public IActionResult Register()
         {
             if (User.Identity.IsAuthenticated)
@@ -79,6 +80,8 @@ namespace WisePoll.Controllers
                 Password = model.Password,
                 StayLog = false
             }, null) ;
+
+            _mailService.SendMail();
 
             return RedirectToAction("index", "Home");
         }
