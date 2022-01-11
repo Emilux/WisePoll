@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WisePoll.Data;
@@ -20,12 +21,13 @@ namespace WisePoll.Controllers
     public class PollController : Controller
     {
         private readonly IPollsService _pollsService;
+        private readonly IEmailService _emailService;
         private readonly ILogger<PollController> _logger;
-        public PollController(IPollsService pollsService, ILogger<PollController> logger)
+        public PollController(IPollsService pollsService, ILogger<PollController> logger, IEmailService emailService)
         {
             _pollsService = pollsService;
             _logger = logger;
-
+            _emailService = emailService;
         }
         [HttpGet]
         public IActionResult Create()
@@ -33,6 +35,7 @@ namespace WisePoll.Controllers
             return View(); 
         }
         
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreatePollViewModel model)
@@ -43,8 +46,26 @@ namespace WisePoll.Controllers
                 return View(model);
             }
             await _pollsService.CreatePollAsync(model);
-            return RedirectToAction("Index","Home");
+
+            //  User Pseudo
+            var CreateUser = User.FindFirst("Name")?.Value;
+
+            // @TODO Recuperer l'id du poll créer
+            var PollsId = 1;
+
+            var subject = "Wisepoll: Survey invitation: " + model.Title;
+            var body =
+                "<h2 style=''>" + model.Title + "</h2>" +
+                "<p>Your fiend " + CreateUser + " invites you to participate in its poll " + model.Title + "</p>" +
+                "<p>Visit the following address to participate, after you are registered with this email address</p>" +
+                "<p style=''><a href='#" + this.Url.Action("Vote", "Polls", PollsId) +"'>Link</a>";
+
+            _emailService.SendMail(model.Members, subject, body);
+
+            return RedirectToAction("Success","Poll");
         }
+
+
         [Authorize]
         public async Task<IActionResult> Vote(int id)
         {
