@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -20,10 +21,12 @@ namespace WisePoll.Services
     {
         private readonly IPollsRepository _repository;
         private readonly ILogger<PollsService> _logger;
-        public PollsService(IPollsRepository db, ILogger<PollsService> logger)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public PollsService(IPollsRepository db, ILogger<PollsService> logger,IHttpContextAccessor httpContextAccessor)
         {
             _repository = db;
             _logger = logger;
+            _httpContextAccessor = httpContextAccessor;
         }
         
         public async Task<IEnumerable<HomeIndexViewModel>> GetAllByUserIdAsync(int userId)
@@ -56,6 +59,17 @@ namespace WisePoll.Services
                 "Is_active"
             });
         }
+        
+        public async Task VotePollAsync(CreateVotePollViewModel model)
+        {
+            var pollFields = new Polls().PollFields;
+            var members = new Polls().Members;
+            var newMembersPollFields = members.Select(m => m.PollFields);
+            foreach (var newMembersPollField in newMembersPollFields)
+            {
+                Console.WriteLine(newMembersPollField);
+            }
+        }
 
         public async Task CreatePollAsync(CreatePollViewModel model)
         {
@@ -72,25 +86,48 @@ namespace WisePoll.Services
             });
 
             var membersEnumerable = members.ToList();
-            Polls polls = new()
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst("UserId")?.Value;
+            if (userId != null)
             {
-                Title = model.Title,
-                Text = model.Text,
-                Members = membersEnumerable,
-                PollFields = pollFields.ToList(),
-                Is_active = true,
-                Multiple = true,
-                UsersId = 2
-            };
+                Polls polls = new()
+                {
+                    Title = model.Title,
+                    Text = model.Text,
+                    Members = membersEnumerable,
+                    PollFields = pollFields.ToList(),
+                    Is_active = true,
+                    Multiple = model.Multiple,
+                    UsersId = int.Parse(userId)
+                };
 
-            await _repository.AddAsync(polls);
+                await _repository.AddAsync(polls);
+            }
         }
 
-        public async Task<VotePollViewModel> GetAsync(int id)
+        public async Task<VotePollViewModel> GetAsync(int id, bool isDetached = false)
         {
-            var poll = await _repository.GetAsync(id);
+            var poll = await _repository.GetAsync(id,isDetached);
 
             var model = new VotePollViewModel
+            {
+                Id = poll.Id,
+                Title = poll.Title,
+                Text = poll.Text,
+                Is_active = poll.Is_active,
+                Multiple = poll.Multiple,
+                Members = poll.Members,
+                PollFields = poll.PollFields,
+                UsersId = poll.UsersId
+            };
+
+            return model;
+        }
+        
+        public async Task<ResultPollViewModel> GetResultsAsync(int id, bool isDetached = false)
+        {
+            var poll = await _repository.GetAsync(id,isDetached);
+
+            var model = new ResultPollViewModel
             {
                 Id = poll.Id,
                 Title = poll.Title,

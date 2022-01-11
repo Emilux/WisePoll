@@ -63,6 +63,7 @@ namespace WisePoll.Services
                 {
                     var claims = new List<Claim> {
                         new Claim(ClaimTypes.Name, FoundUser.Pseudo),
+                        new Claim("UserId", FoundUser.Id.ToString()),
                         new Claim(ClaimTypes.Email, FoundUser.Email),
                         new Claim("Role", "User")
                     };
