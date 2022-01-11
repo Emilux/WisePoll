@@ -28,9 +28,9 @@ namespace WisePoll.Data.Repositories
 
         }
 
-        public Users FindUserByEmail(Users user)
+        public Users FindUserByEmail(string email)
         {
-            return _context.Users.FirstOrDefault(u => u.Email == user.Email);
+            return _context.Users.FirstOrDefault(u => u.Email == email);
         }
     }
 }

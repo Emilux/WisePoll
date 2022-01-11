@@ -7,6 +7,6 @@ namespace WisePoll.Data.Repositories
     public interface IUsersRepository
     {
         Task RegisterAsync(Users user);
-        Users FindUserByEmail(Users user);
+        Users FindUserByEmail(string email);
     }
 }

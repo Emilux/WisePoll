@@ -3,7 +3,14 @@ form.form, .form {
   .add-more-choice-btn{
     margin-top: $base-spacing;
   }
-  
+  .field-validation-valid{
+    display: none;
+  }
+  .field-validation-error{
+    margin: $base-spacing 0;
+    color: $color-yellow;
+    display: block;
+  }
   &-group{
     margin-top: $s-spacing ;
     &:first-of-type{
@@ -80,7 +87,7 @@ form.form, .form {
         }
       }
     }
-    &[type=checkbox] {
+    &[type=checkbox],&[type=radio] {
       width: auto;
       appearance: none;
       border-radius: 0;

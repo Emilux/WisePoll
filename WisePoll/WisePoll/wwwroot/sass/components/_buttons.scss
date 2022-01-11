@@ -33,4 +33,12 @@
       text-decoration: none;
     }
   }
+  &[disabled]{
+    background-color: $color-clear-grey;
+    color: $color-black;
+    cursor: default;
+    &:hover{
+      background-color: darken($color-clear-grey,2);
+    }
+  }
 }
