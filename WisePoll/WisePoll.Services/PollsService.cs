@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -20,11 +21,13 @@ namespace WisePoll.Services
     public class PollsService : IPollsService
     {
         private readonly IPollsRepository _repository;
+        private readonly IUsersRepository _usersRepository;
         private readonly ILogger<PollsService> _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public PollsService(IPollsRepository db, ILogger<PollsService> logger,IHttpContextAccessor httpContextAccessor)
+        public PollsService(IPollsRepository db,IUsersRepository usersRepository, ILogger<PollsService> logger,IHttpContextAccessor httpContextAccessor)
         {
             _repository = db;
+            _usersRepository = usersRepository;
             _logger = logger;
             _httpContextAccessor = httpContextAccessor;
         }
@@ -74,21 +77,32 @@ namespace WisePoll.Services
         public async Task CreatePollAsync(CreatePollViewModel model)
         {
             var ms = Regex.Replace(model.Members, @"\s+", "").Split(',', StringSplitOptions.TrimEntries).ToList();
-
-            var members = ms.Select(member => new Members
+            
+            var members = ms.Select(member =>
             {
-                Email = member,
+                var user = _usersRepository.FindUserByEmail(member);
+                return new Members
+                {
+                    Email = member,
+                };
             });
-
+            
             var pollFields = model.PollFields.Select(pollField => new PollFields
             {
                 Label = pollField
             });
 
             var membersEnumerable = members.ToList();
-            var userId = _httpContextAccessor.HttpContext.User.FindFirst("UserId")?.Value;
-            if (userId != null)
+            var userIdString = _httpContextAccessor.HttpContext.User.FindFirst("UserId")?.Value;
+            var isUserIdInt = int.TryParse(userIdString, out var userId);
+            var userEmail = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+            if (isUserIdInt && userEmail != null)
             {
+                var user = _usersRepository.FindUserByEmail(userEmail);
+                membersEnumerable.Add(new Members
+                {
+                    Email = userEmail,
+                });
                 Polls polls = new()
                 {
                     Title = model.Title,
@@ -97,7 +111,7 @@ namespace WisePoll.Services
                     PollFields = pollFields.ToList(),
                     Is_active = true,
                     Multiple = model.Multiple,
-                    UsersId = int.Parse(userId)
+                    UsersId = userId
                 };
 
                 await _repository.AddAsync(polls);

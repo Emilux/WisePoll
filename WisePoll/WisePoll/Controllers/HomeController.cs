@@ -31,11 +31,11 @@ namespace WisePoll.Controllers
          */
         public async Task<IActionResult> Index()
         {
-            const bool loggedIn = true;
-            
+            var loggedIn = User.Identity is {IsAuthenticated: true};
+            Console.WriteLine(loggedIn);
             var userIdString = User.FindFirst("UserId")?.Value;
-            
-            if ((userIdString == null || !loggedIn)) return View();
+            Console.WriteLine(userIdString);
+            if (userIdString == null || !loggedIn) return View();
             
             if (!int.TryParse(userIdString, out var userId)) return View();
             
