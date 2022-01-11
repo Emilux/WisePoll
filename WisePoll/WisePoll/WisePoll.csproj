@@ -126,5 +126,7 @@
     <Exec Command="npm run build:css" />
     <Copy SourceFiles="$(ProjectDir)wwwroot/css/style.css" DestinationFolder="$(PublishDir)wwwroot/css" />
   </Target>
+  
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

@@ -65,7 +65,7 @@ namespace WisePoll.Services
                         new Claim(ClaimTypes.Name, FoundUser.Pseudo),
                         new Claim("UserId", FoundUser.Id.ToString()),
                         new Claim(ClaimTypes.Email, FoundUser.Email),
-                        new Claim("Role", "User")
+                        new Claim(ClaimTypes.Role, "User")
                     };
 
                     var identity = new ClaimsIdentity(claims, "Cookies");
@@ -73,7 +73,7 @@ namespace WisePoll.Services
 
                     var properties = new AuthenticationProperties()
                     {
-                        IsPersistent = StayLog
+                        IsPersistent = StayLog,
                     };
 
                     await _httpContext.SignInAsync(

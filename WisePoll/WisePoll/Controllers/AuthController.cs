@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WisePoll.Data.Models;
-using WisePoll.Data.Repositories;
 using WisePoll.Services;
 using WisePoll.Services.ViewModels;
 
@@ -12,38 +12,45 @@ namespace WisePoll.Controllers
     {
         private readonly IAuthService _authService;
 
-        public AuthController(IAuthService service)
+        public AuthController(IAuthService authservice)
         {
-            _authService = service;
+            _authService = authservice;
         }
-
 
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("index", "Home");
+            }
             return View();
         }
 
         public IActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("index", "Home");
+            }
             return View();
         }
 
+        [Authorize]
         public IActionResult Logout()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                HttpContext.SignOutAsync();
-            }
-            else
-            {
-                return Unauthorized();
-            }
+            HttpContext.SignOutAsync();
+
             return RedirectToAction("index", "Home");
         }
 
         [HttpPost]
         public async Task<IActionResult> RegisterAsync(AuthRegisterViewModel model)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("index", "Home");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -77,6 +84,11 @@ namespace WisePoll.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(AuthLoginViewModel model, string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("index", "Home");
+            }
+
             if (ModelState.IsValid)
             {
 
