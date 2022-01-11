@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
 using WisePoll.Data.Models;
 
@@ -23,22 +24,42 @@ namespace WisePoll.Data.Repositories
         public Task<List<Polls>> GetAllAsync()
         {
             return _context.Polls
-                .Include(m => m.Members)
+                .Include(poll => poll.Members)
+                .ThenInclude(member => member.PollFields)
+                .Include(poll => poll.PollFields)
+                .ThenInclude(pollField => pollField.Members)
                 .ToListAsync();
+
+
         }
         
         public Task<List<Polls>> GetAllByUserIdAsync(int userId)
         {
             return _context.Polls
-                .Include(m => m.Members)
+                .Include(poll => poll.Members)
+                .ThenInclude(member => member.PollFields)
+                .Include(poll => poll.PollFields)
+                .ThenInclude(pollField => pollField.Members)
                 .Where(m => m.UsersId == userId)
                 .ToListAsync();
         }
 
-        public Task<Polls> GetAsync(int id)
-            => _context.Polls
-                .Include(m => m.PollFields)
+        public async Task<Polls> GetAsync(int id,bool isDetached = false)
+        {
+            var polls = await _context.Polls
+                .Include(poll => poll.Members)
+                .ThenInclude(member => member.PollFields)
+                .Include(poll => poll.PollFields)
+                .ThenInclude(pollField => pollField.Members)
                 .FirstOrDefaultAsync(m => m.Id == id);
+            
+            if (isDetached)
+            {
+                _context.Entry(polls).State = EntityState.Detached;
+            }
+            
+            return polls;
+        }
 
         public async Task AddAsync(Polls polls)
         {
@@ -71,6 +92,7 @@ namespace WisePoll.Data.Repositories
 
         public async Task UpdateAsync(Polls polls, List<string> properties)
         {
+            _context.Entry(polls).State = EntityState.Detached;
             foreach (var p in properties)
             {
                 _context.Entry(polls).Property(p).IsModified = true;

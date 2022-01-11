@@ -4,6 +4,7 @@
     ViewData["Subtitle"] = "Your polls";
     ViewData["Class"] = "LoggedHome";
 }
+@using System.Security.Claims
 @model IEnumerable<WisePoll.Services.ViewModels.HomeIndexViewModel>
 
 <div>
@@ -14,14 +15,19 @@
     @foreach (var p in Model)
     {
         <div class="poll-list-item">
-            Active : @p.Is_active
             <div class="poll-list-item-infos">
                 <a class="poll-list-item-infos-item poll-list-item-infos-title link">@p.Title</a>
                 <span class="poll-list-item-infos-item poll-list-item-infos-participants"><strong>@p.Members.Count</strong> Participant@(p.Members.Count > 1 ? "s" : "")</span>
             </div>
             <div class="poll-list-item-actions">
-                <a class="poll-list-item-actions-link link" asp-controller="Poll" asp-action="Vote" asp-route-id="@p.Id">View</a>
-                <a class="poll-list-item-actions-link btn btn-primary" asp-area="" asp-controller="Poll" asp-action="Desactivate" asp-route-id="@p.Id">End the poll</a>
+                <a class="poll-list-item-actions-link link" asp-controller="Poll" asp-action="@(p.Is_active ? "Vote" : "Result")" asp-route-id="@p.Id">View @(p.Is_active ? string.Empty : "Results")</a>
+                @if (p.Is_active)
+                {
+                    <a  class="poll-list-item-actions-link btn btn-primary" asp-controller="Poll" asp-action="Desactivate" asp-route-id="@p.Id" >End the poll</a>                }
+                else
+                {
+                    <a  class="poll-list-item-actions-link btn btn-primary" href="#" disabled="true" >End the poll</a>
+                }
             </div>
         </div>
     }

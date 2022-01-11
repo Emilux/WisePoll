@@ -56,7 +56,7 @@ namespace WisePoll.Controllers
                 Password = model.Password
             };
 
-            if (_authService.GetUserByMail(user) != null)
+            if (_authService.GetUserByMail(user.Email) != null)
             {
                 ModelState.AddModelError("email", "Email is all ready used");
                 return View(model);

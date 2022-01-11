@@ -39,9 +39,9 @@ namespace WisePoll.Services
         }
 
 
-        public Users GetUserByMail(Users user)
+        public Users GetUserByMail(string email)
         {
-            Users result = _repo.FindUserByEmail(user);
+            var result = _repo.FindUserByEmail(email);
 
             return result;
         }
@@ -49,7 +49,7 @@ namespace WisePoll.Services
 
         public async Task<bool> AuthenticateAsync(Users users, bool StayLog)
         {
-            var FoundUser = GetUserByMail(users);
+            var FoundUser = GetUserByMail(users.Email);
 
             // Search a user with the same Email
             if (FoundUser != null)
@@ -63,6 +63,7 @@ namespace WisePoll.Services
                 {
                     var claims = new List<Claim> {
                         new Claim(ClaimTypes.Name, FoundUser.Pseudo),
+                        new Claim("UserId", FoundUser.Id.ToString()),
                         new Claim(ClaimTypes.Email, FoundUser.Email),
                         new Claim("Role", "User")
                     };

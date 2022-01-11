@@ -8,7 +8,6 @@ namespace WisePoll.Data.Models
         public Members()
         {
             PollFields = new List<PollFields>();
-            Polls = new List<Polls>();
         }
 
         [Key]
@@ -17,9 +16,8 @@ namespace WisePoll.Data.Models
         [Required]
         [StringLength(255)]
         public string Email { get; set; }
-
-        public ICollection<Polls> Polls { get; set; }
         
+        public int? PollsId { get; set; }
         public ICollection<PollFields> PollFields { get; set; }
     }
 }
