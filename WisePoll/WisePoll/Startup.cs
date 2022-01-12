@@ -32,8 +32,7 @@ namespace WisePoll
                 builder =>
                 {
                     builder
-                        .UseMySql(cn, serverVersion)
-                        ;
+                        .UseMySql(cn, serverVersion);
                     
                 });
 

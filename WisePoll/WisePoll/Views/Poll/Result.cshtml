@@ -5,10 +5,12 @@
     ViewData["Class"] = "result-poll";
 }
 @model WisePoll.Services.ViewModels.ResultPollViewModel
+@{
+    Model.PollFields.Sort((a, b) => b.Users.Count - a.Users.Count);
+}
 <p>
     @Model.Text
 </p>
-
 <div class="result-charts">
     <div class="result-charts-item" data-chart-bar data-total-votes="@Model.PollFields.SelectMany(member => member.Users).Distinct().Count()">
         @foreach (var pollField in Model.PollFields)
