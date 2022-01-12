@@ -59,8 +59,8 @@ namespace WisePoll.Controllers
             var subject = "Wisepoll: Survey invitation: " + model.Title;
             var body =
                 "<h2 style=''>" + model.Title + "</h2>" +
-                $"<p>Your fiend {CreateUser} invites you to participate in its poll {model.Title}</p>" +
-                "<p>Visit the following address to participate, after you are registered with this email address</p>" +
+                $"<p>Your friend {CreateUser} invite you to participate at his poll {model.Title}</p>" +
+                $"<p>Visit the following address to participate, and Log In with this mail address to participate.</p>" +
                 $"<a href=\"{link}\" target='_blank'>Poll link</a>";
              _emailService.SendMail(model.Members, subject, body);
 
