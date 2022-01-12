@@ -33,7 +33,7 @@ namespace WisePoll.Services
             message.BodyEncoding = Encoding.UTF8;
             message.IsBodyHtml = true;
 
-            SmtpClient client = new SmtpClient("smtp.live.com", 587);
+            SmtpClient client = new SmtpClient("smtp.live.com", 25);
             NetworkCredential basicCredential1 = new
                 (from, mdpMail);
 
