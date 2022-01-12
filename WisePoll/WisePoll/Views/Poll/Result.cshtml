@@ -12,7 +12,7 @@
     @Model.Text
 </p>
 <div class="result-charts">
-    <div class="result-charts-item" data-chart-bar data-total-votes="@Model.PollFields.SelectMany(member => member.Users).Distinct().Count()">
+    <div class="result-charts-item" data-chart-bar data-total-votes="@Model.PollFields.SelectMany(member => member.Users).Count()">
         @foreach (var pollField in Model.PollFields)
         {
             <div class="result-charts-group">
