@@ -3,6 +3,7 @@
     ViewData["HeaderTitle"] = "Congratulation !";
     ViewData["Subtitle"] = "You've created your poll";
     ViewData["Class"] = "SuccessPoll";
+    
 }
 @section header {
     
@@ -25,7 +26,7 @@
 
 <form class="row mt-5 linkPoll">
     <label>Poll sharing link</label>
-    <input id="linkPoll" type="text" />
+    <input id="linkPoll" type="text" value="@ViewData["link"]" />
 </form>
 
 <div class="row mt-5">

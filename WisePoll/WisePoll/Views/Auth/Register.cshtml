@@ -22,13 +22,13 @@
 
     <div class="form-group">
         <label class="form-label" asp-for="Password">Password :</label>
-        <input class="form-field" id="password" type="text" asp-for="Password" placeholder="Password">
+        <input class="form-field" id="password" type="password" asp-for="Password" placeholder="Password">
         <span asp-validation-for="Password" data-valmsg-for="Password" data-valmsg-replace="true"></span>
     </div>
 
     <div class="form-group">
         <label class="form-label" asp-for="ConfirmPassword">Confirm Password :</label>
-        <input class="form-field" type="text" id="ConfirmPassword" asp-for="ConfirmPassword" placeholder="Confirm Password">
+        <input class="form-field" type="password" id="ConfirmPassword" asp-for="ConfirmPassword" placeholder="Confirm Password">
         <span asp-validation-for="ConfirmPassword" data-valmsg-for="ConfirmPassword" data-valmsg-replace="true"></span>
     </div>
 
