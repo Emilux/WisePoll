@@ -10,14 +10,14 @@
 </p>
 
 <div class="result-charts">
-    <div class="result-charts-item" data-chart-bar data-total-votes="@Model.Members.SelectMany(member => member.PollFields).Distinct().Count()">
+    <div class="result-charts-item" data-chart-bar data-total-votes="@Model.PollFields.SelectMany(member => member.Users).Distinct().Count()">
         @foreach (var pollField in Model.PollFields)
         {
             <div class="result-charts-group">
                 <div class="result-charts-group-title">@pollField.Label</div>
-                <div class="result-charts-bar" data-votes="@pollField.Members.Count">
+                <div class="result-charts-bar" data-votes="@pollField.Users.Count">
                     <div class="result-charts-bar-vote">
-                        <strong>@pollField.Members.Count</strong> Vote@(@pollField.Members.Count > 1 ? "s" : string.Empty)
+                        <strong>@pollField.Users.Count</strong> Vote@(pollField.Users.Count > 1 ? "s" : string.Empty)
                     </div>
                 </div>
             </div> 

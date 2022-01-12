@@ -25,9 +25,9 @@ namespace WisePoll.Data.Repositories
         {
             return _context.Polls
                 .Include(poll => poll.Members)
-                .ThenInclude(member => member.PollFields)
                 .Include(poll => poll.PollFields)
-                .ThenInclude(pollField => pollField.Members)
+                .ThenInclude(pollField => pollField.Users)
+                .OrderBy(m => m.Is_active)
                 .ToListAsync();
         }
         
@@ -35,10 +35,10 @@ namespace WisePoll.Data.Repositories
         {
             return _context.Polls
                 .Include(poll => poll.Members)
-                .ThenInclude(member => member.PollFields)
                 .Include(poll => poll.PollFields)
-                .ThenInclude(pollField => pollField.Members)
+                .ThenInclude(pollField => pollField.Users)
                 .Where(m => m.UsersId == userId)
+                .OrderByDescending(m => m.Is_active)
                 .ToListAsync();
         }
 
@@ -46,9 +46,8 @@ namespace WisePoll.Data.Repositories
         {
             var polls = await _context.Polls
                 .Include(poll => poll.Members)
-                .ThenInclude(member => member.PollFields)
                 .Include(poll => poll.PollFields)
-                .ThenInclude(pollField => pollField.Members)
+                .ThenInclude(pollField => pollField.Users)
                 .FirstOrDefaultAsync(m => m.Id == id);
             
             if (isDetached)
@@ -65,6 +64,19 @@ namespace WisePoll.Data.Repositories
                 throw new ArgumentException(null, nameof(polls));
             
             await _context.Polls.AddAsync(polls);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddVoteAsync(int userId,int pollFieldsId)
+        {
+            var users = await _context.Users
+                .Include(p => p.PollFields)
+                .SingleAsync(p => p.Id == userId);
+            var pollFields = await _context.PollFields
+                .Include(p => p.Users)
+                .SingleAsync(p => p.Id == pollFieldsId);
+            
+            users.PollFields.Add(pollFields);
             await _context.SaveChangesAsync();
         }
 
@@ -100,7 +112,9 @@ namespace WisePoll.Data.Repositories
 
         public async Task<Polls> GetIdPollsByUserIdAsync(int userId)
         {
-            return await _context.Polls.OrderByDescending(p => p.Id).FirstOrDefaultAsync(m => m.UsersId == userId);
+            return await _context.Polls
+                .OrderByDescending(p => p.Id)
+                .FirstOrDefaultAsync(m => m.UsersId == userId);
         }
     }
 }

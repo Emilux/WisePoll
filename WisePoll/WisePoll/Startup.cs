@@ -33,11 +33,6 @@ namespace WisePoll
                 {
                     builder
                         .UseMySql(cn, serverVersion)
-#if DEBUG
-                        .LogTo(Console.WriteLine, LogLevel.Information)
-                        .EnableSensitiveDataLogging()
-                        .EnableDetailedErrors();
-#endif
                         ;
                     
                 });

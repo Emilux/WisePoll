@@ -103,14 +103,12 @@ namespace WisePoll.Controllers
                 var result = await _authService.AuthenticateAsync(user, StayLog);
                 if (result)
                 {
-                    if (string.IsNullOrEmpty(returnUrl))
-                    {
-                        return RedirectToAction("index", "Home");
-                    }
-                    else
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
+                        
                     }
+                    return RedirectToAction("index", "Home");
                 }
             }
             ModelState.AddModelError("", "Invalid Email or Password");

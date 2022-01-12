@@ -65,12 +65,18 @@ namespace WisePoll.Services
         
         public async Task VotePollAsync(CreateVotePollViewModel model)
         {
-            var pollFields = new Polls().PollFields;
-            var members = new Polls().Members;
-            var newMembersPollFields = members.Select(m => m.PollFields);
-            foreach (var newMembersPollField in newMembersPollFields)
+            if (model.PollFields != null)
             {
-                Console.WriteLine(newMembersPollField);
+                foreach (var p in model.PollFields)
+                {
+                    var userIdString = _httpContextAccessor.HttpContext.User.FindFirst("UserId")?.Value;
+                    var isUserIdInt = int.TryParse(userIdString, out var userId);
+                    if (isUserIdInt)
+                    {
+                        await _repository.AddVoteAsync(userId,p);
+                    }
+                    
+                }
             }
         }
 
@@ -78,15 +84,13 @@ namespace WisePoll.Services
         {
             var ms = Regex.Replace(model.Members, @"\s+", "").Split(',', StringSplitOptions.TrimEntries).ToList();
             
-            var members = ms.Select(member =>
+            // Add all poll members
+            var members = ms.Select(member => new Members
             {
-                var user = _usersRepository.FindUserByEmail(member);
-                return new Members
-                {
-                    Email = member,
-                };
+                Email = member,
             });
             
+            // Add all poll fields
             var pollFields = model.PollFields.Select(pollField => new PollFields
             {
                 Label = pollField
@@ -98,11 +102,13 @@ namespace WisePoll.Services
             var userEmail = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
             if (isUserIdInt && userEmail != null)
             {
-                var user = _usersRepository.FindUserByEmail(userEmail);
+                // Add current user to the poll members
                 membersEnumerable.Add(new Members
                 {
                     Email = userEmail,
                 });
+                
+                // Create the poll model
                 Polls polls = new()
                 {
                     Title = model.Title,
@@ -121,18 +127,19 @@ namespace WisePoll.Services
         public async Task<VotePollViewModel> GetAsync(int id, bool isDetached = false)
         {
             var poll = await _repository.GetAsync(id,isDetached);
-
-            var model = new VotePollViewModel
-            {
-                Id = poll.Id,
-                Title = poll.Title,
-                Text = poll.Text,
-                Is_active = poll.Is_active,
-                Multiple = poll.Multiple,
-                Members = poll.Members,
-                PollFields = poll.PollFields,
-                UsersId = poll.UsersId
-            };
+            
+            var model = new VotePollViewModel();
+            
+            if (poll == null) return model;
+            
+            model.Id = poll.Id;
+            model.Is_active = poll.Is_active;
+            model.Title = poll.Title;
+            model.Text = poll.Text;
+            model.Multiple = poll.Multiple;
+            model.Members = poll.Members;
+            model.PollFields = poll.PollFields;
+            model.UsersId = poll.UsersId;
 
             return model;
         }
@@ -140,18 +147,19 @@ namespace WisePoll.Services
         public async Task<ResultPollViewModel> GetResultsAsync(int id, bool isDetached = false)
         {
             var poll = await _repository.GetAsync(id,isDetached);
-
-            var model = new ResultPollViewModel
-            {
-                Id = poll.Id,
-                Title = poll.Title,
-                Text = poll.Text,
-                Is_active = poll.Is_active,
-                Multiple = poll.Multiple,
-                Members = poll.Members,
-                PollFields = poll.PollFields,
-                UsersId = poll.UsersId
-            };
+            
+            var model = new ResultPollViewModel();
+            
+            if (poll == null) return model;
+            
+            model.Id = poll.Id;
+            model.Is_active = poll.Is_active;
+            model.Title = poll.Title;
+            model.Text = poll.Text;
+            model.Multiple = poll.Multiple;
+            model.Members = poll.Members;
+            model.PollFields = poll.PollFields;
+            model.UsersId = poll.UsersId;
 
             return model;
         }

@@ -9,8 +9,8 @@ using WisePoll.Data;
 namespace WisePoll.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220111145632_usermember-relation")]
-    partial class usermemberrelation
+    [Migration("20220111220119_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,36 +18,6 @@ namespace WisePoll.Data.Migrations
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.13");
-
-            modelBuilder.Entity("MembersPollFields", b =>
-                {
-                    b.Property<int>("MembersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PollFieldsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MembersId", "PollFieldsId");
-
-                    b.HasIndex("PollFieldsId");
-
-                    b.ToTable("MembersPollFields");
-                });
-
-            modelBuilder.Entity("MembersPolls", b =>
-                {
-                    b.Property<int>("MembersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PollsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MembersId", "PollsId");
-
-                    b.HasIndex("PollsId");
-
-                    b.ToTable("MembersPolls");
-                });
 
             modelBuilder.Entity("MembersUsers", b =>
                 {
@@ -64,6 +34,21 @@ namespace WisePoll.Data.Migrations
                     b.ToTable("MembersUsers");
                 });
 
+            modelBuilder.Entity("PollFieldsUsers", b =>
+                {
+                    b.Property<int>("PollFieldsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PollFieldsId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("PollFieldsUsers");
+                });
+
             modelBuilder.Entity("WisePoll.Data.Models.Members", b =>
                 {
                     b.Property<int>("Id")
@@ -75,10 +60,12 @@ namespace WisePoll.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
-                    b.Property<int?>("UsersId")
+                    b.Property<int?>("PollsId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PollsId");
 
                     b.ToTable("Members");
                 });
@@ -160,36 +147,6 @@ namespace WisePoll.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("MembersPollFields", b =>
-                {
-                    b.HasOne("WisePoll.Data.Models.Members", null)
-                        .WithMany()
-                        .HasForeignKey("MembersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WisePoll.Data.Models.PollFields", null)
-                        .WithMany()
-                        .HasForeignKey("PollFieldsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MembersPolls", b =>
-                {
-                    b.HasOne("WisePoll.Data.Models.Members", null)
-                        .WithMany()
-                        .HasForeignKey("MembersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WisePoll.Data.Models.Polls", null)
-                        .WithMany()
-                        .HasForeignKey("PollsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MembersUsers", b =>
                 {
                     b.HasOne("WisePoll.Data.Models.Members", null)
@@ -203,6 +160,28 @@ namespace WisePoll.Data.Migrations
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("PollFieldsUsers", b =>
+                {
+                    b.HasOne("WisePoll.Data.Models.PollFields", null)
+                        .WithMany()
+                        .HasForeignKey("PollFieldsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WisePoll.Data.Models.Users", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WisePoll.Data.Models.Members", b =>
+                {
+                    b.HasOne("WisePoll.Data.Models.Polls", null)
+                        .WithMany("Members")
+                        .HasForeignKey("PollsId");
                 });
 
             modelBuilder.Entity("WisePoll.Data.Models.PollFields", b =>
@@ -225,6 +204,8 @@ namespace WisePoll.Data.Migrations
 
             modelBuilder.Entity("WisePoll.Data.Models.Polls", b =>
                 {
+                    b.Navigation("Members");
+
                     b.Navigation("PollFields");
                 });
 

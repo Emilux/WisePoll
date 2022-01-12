@@ -2,20 +2,25 @@
     ViewData["Title"] = "Vote Poll Page";
     ViewData["HeaderTitle"] = Model.Title;
     ViewData["Subtitle"] = "Vote in the poll";
-
+    
 }
+@using System.Security.Claims
 @model WisePoll.Services.ViewModels.VotePollViewModel
+@{
+    var havePollFieldsChecked = Model.PollFields.Any(m => m.Users.Any(u => u.Email == User.FindFirstValue(ClaimTypes.Email)));
+}
 <div id="PollVote">
     <p class="description">
         @Model.Text
     </p>
 
     <form class="form" method="post">
-        
+        <span asp-validation-for="PollFields"></span>
         @foreach (var m in Model.PollFields)
         {
+            var pollChecked = m.Users.Any(u => u.Email == User.FindFirstValue(ClaimTypes.Email));
             <div class="form-check">
-                <input id="PollFields" class="form-field" type="@( Model.Multiple ? "checkbox" : "radio")" name="PollFields"/>
+                <input checked="@(pollChecked || !havePollFieldsChecked && Model.PollFields.First() == m && !Model.Multiple)" name="PollFields" id="PollFields" class="form-field" value="@m.Id" type="@(Model.Multiple ? "checkbox" : "radio")"/>
                 <label for="PollFields" name="PollFields" class="form-label form-label-check">@m.Label</label>
             </div>
         }
