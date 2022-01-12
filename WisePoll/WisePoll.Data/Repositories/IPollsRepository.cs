@@ -14,5 +14,6 @@ namespace WisePoll.Data.Repositories
         Task UpdateAsync(Polls polls);
         Task UpdateAsync(Polls polls, List<string> properties);
         Task<Polls> GetIdPollsByUserIdAsync(int id);
+        Task AddVoteAsync(int userId,int pollFieldsId);
     }
 }

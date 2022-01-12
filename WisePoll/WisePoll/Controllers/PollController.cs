@@ -39,7 +39,7 @@ namespace WisePoll.Controllers
             {
                 return View(model);
             }
-             // await _pollsService.CreatePollAsync(model);
+            await _pollsService.CreatePollAsync(model);
 
             //  PollsId and User.Pseudo
             var CreateUser = User.FindFirstValue(ClaimTypes.Name);
@@ -85,6 +85,12 @@ namespace WisePoll.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            
+            // Check if current connected user have already participated to the poll
+            if (!data.PollFields.All(p => p.Users.All(u => u.Email != User.FindFirstValue(ClaimTypes.Email))))
+            {
+                return RedirectToAction("Result", new { id });   
+            }
 
             // Check if the connected user is member of the poll
             if (data.Members.All(m => m.Email != User.FindFirstValue(ClaimTypes.Email)))
@@ -103,18 +109,32 @@ namespace WisePoll.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Vote(VotePollViewModel model,int id)
+        public async Task<IActionResult> Vote(CreateVotePollViewModel model,int id)
         {
             if (id == 0)
             {
-                return NotFound();
+                return RedirectToAction("Index", "Home");
             }
-
+            var data = await _pollsService.GetAsync(id);
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View(data);
+            }
+            
+            // Check that there no more than one choice checked if its a single choice poll
+            if (!data.Multiple && model.PollFields.Count > 1)
+            {
+                ModelState.AddModelError("PollFields","Please select only one choice");
+                return View(data);
             }
 
+            // Check if the checked choices are in the current poll
+            if (!data.PollFields.Any(p => model.PollFields.Contains(p.Id)))
+            {
+                ModelState.AddModelError("PollFields","Please select a correct choice");
+                return View(data);
+            }
+            
             await _pollsService.VotePollAsync(model);
             return RedirectToAction("Result", new { id });
         }
@@ -144,13 +164,19 @@ namespace WisePoll.Controllers
 
             var data = await _pollsService.GetAsync(id, true);
 
+            // Check if poll found
+            if (data.Id == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
             var userIdString = User.FindFirst("UserId")?.Value;
 
-            if ((userIdString == null)) Unauthorized();
+            if (userIdString == null) return RedirectToAction("Index", "Home");
 
-            if (!int.TryParse(userIdString, out var userId)) Unauthorized();
+            if (!int.TryParse(userIdString, out var userId)) return RedirectToAction("Index", "Home");
 
-            if (userId != data.UsersId || !data.Is_active) Unauthorized();
+            if (userId != data.UsersId || !data.Is_active) return RedirectToAction("Index", "Home");
 
             await _pollsService.DesactivatePollAsync(id);
             return RedirectToAction("Index", "Home");
@@ -165,6 +191,19 @@ namespace WisePoll.Controllers
 
             var data = await _pollsService.GetResultsAsync(id);
 
+            // Check if poll found
+            if (data.Id == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
+            // Check if current connected user have already participated to the poll or the poll is active
+            if (data.PollFields.All(p => p.Users.All(u => u.Email != User.FindFirstValue(ClaimTypes.Email))) && data.Is_active)
+            {
+                return RedirectToAction("Index", "Home");    
+            }
+
+            // Check if current connected user is part of the poll
             if (data.Members.All(m => m.Email != User.FindFirstValue(ClaimTypes.Email)))
                 return RedirectToAction("Index", "Home");
 

@@ -10,7 +10,7 @@ namespace WisePoll.Services
         Task<IEnumerable<HomeIndexViewModel>> GetAllByUserIdAsync(int userId);
         Task DesactivatePollAsync(int id);
         Task CreatePollAsync(CreatePollViewModel model);
-        Task VotePollAsync(VotePollViewModel model);
+        Task VotePollAsync(CreateVotePollViewModel model);
         Task<VotePollViewModel> GetAsync(int id,bool isDetached = false);
         Task<ResultPollViewModel> GetResultsAsync(int id,bool isDetached = false);
         Task<Polls> GetIdPollsByUserIdAsync(int id);

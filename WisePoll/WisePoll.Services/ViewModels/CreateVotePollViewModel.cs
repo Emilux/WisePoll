@@ -6,6 +6,7 @@ namespace WisePoll.Services.ViewModels
 {
     public class CreateVotePollViewModel
     {
-        public IEnumerable<bool> PollFields { get; set;}
+        [Required(ErrorMessage = "Please at least select one choice")]
+        public List<int> PollFields { get; set;}
     }
 }

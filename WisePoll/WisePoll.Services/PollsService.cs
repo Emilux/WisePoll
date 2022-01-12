@@ -63,21 +63,21 @@ namespace WisePoll.Services
             });
         }
         
-        public async Task VotePollAsync(VotePollViewModel model)
+        public async Task VotePollAsync(CreateVotePollViewModel model)
         {
-            var poll = await this.GetAsync(4);
-            Polls polls = new()
+            if (model.PollFields != null)
             {
-                Title = poll.Title,
-                Text = poll.Text,
-                Members = poll.Members,
-                PollFields = model.PollFields,
-                Is_active = poll.Is_active,
-                Multiple = poll.Multiple,
-                UsersId = 2
-            };
-            
-            await _repository.AddAsync(polls);
+                foreach (var p in model.PollFields)
+                {
+                    var userIdString = _httpContextAccessor.HttpContext.User.FindFirst("UserId")?.Value;
+                    var isUserIdInt = int.TryParse(userIdString, out var userId);
+                    if (isUserIdInt)
+                    {
+                        await _repository.AddVoteAsync(userId,p);
+                    }
+                    
+                }
+            }
         }
 
         public async Task CreatePollAsync(CreatePollViewModel model)
@@ -147,18 +147,19 @@ namespace WisePoll.Services
         public async Task<ResultPollViewModel> GetResultsAsync(int id, bool isDetached = false)
         {
             var poll = await _repository.GetAsync(id,isDetached);
-
-            var model = new ResultPollViewModel
-            {
-                Id = poll.Id,
-                Title = poll.Title,
-                Text = poll.Text,
-                Is_active = poll.Is_active,
-                Multiple = poll.Multiple,
-                Members = poll.Members,
-                PollFields = poll.PollFields,
-                UsersId = poll.UsersId
-            };
+            
+            var model = new ResultPollViewModel();
+            
+            if (poll == null) return model;
+            
+            model.Id = poll.Id;
+            model.Is_active = poll.Is_active;
+            model.Title = poll.Title;
+            model.Text = poll.Text;
+            model.Multiple = poll.Multiple;
+            model.Members = poll.Members;
+            model.PollFields = poll.PollFields;
+            model.UsersId = poll.UsersId;
 
             return model;
         }
