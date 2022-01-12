@@ -76,26 +76,34 @@ namespace WisePoll.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            await _pollsService.VotePollAsync(null);
+            
+            // Get poll data
             var data = await _pollsService.GetAsync(id);
-
-            if (data.Members.Any(m => m.Email == User.FindFirstValue(ClaimTypes.Email)))
+            
+            // Check if poll found
+            if (data.Id == 0)
             {
-                if (!data.Is_active)
-                {
-                    return RedirectToAction("Result", new { id });
-                }
-
-                return View(data);
+                return RedirectToAction("Index", "Home");
             }
 
-            return RedirectToAction("Index", "Home");
+            // Check if the connected user is member of the poll
+            if (data.Members.All(m => m.Email != User.FindFirstValue(ClaimTypes.Email)))
+                return RedirectToAction("Index", "Home");
+            
+            // Check if the poll is active
+            if (!data.Is_active)
+            {
+                return RedirectToAction("Result", new { id });
+            }
+            
+            return View(data);
+
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Vote(CreateVotePollViewModel model, int id)
+        public async Task<IActionResult> Vote(VotePollViewModel model,int id)
         {
             if (id == 0)
             {
@@ -104,8 +112,10 @@ namespace WisePoll.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(model);
             }
+
+            await _pollsService.VotePollAsync(model);
             return RedirectToAction("Result", new { id });
         }
 

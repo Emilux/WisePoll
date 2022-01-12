@@ -15,7 +15,7 @@
         @foreach (var m in Model.PollFields)
         {
             <div class="form-check">
-                <input id="PollFields" class="form-field" type="@( Model.Multiple ? "checkbox" : "radio")" name="PollFields"/>
+                <input asp-for="PollFields" id="PollFields" class="form-field" value="@m.Label" type="@( Model.Multiple ? "checkbox" : "radio")"/>
                 <label for="PollFields" name="PollFields" class="form-label form-label-check">@m.Label</label>
             </div>
         }

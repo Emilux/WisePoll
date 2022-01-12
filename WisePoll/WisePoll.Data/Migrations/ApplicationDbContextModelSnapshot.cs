@@ -17,21 +17,6 @@ namespace WisePoll.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.13");
 
-            modelBuilder.Entity("MembersPollFields", b =>
-                {
-                    b.Property<int>("MembersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PollFieldsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MembersId", "PollFieldsId");
-
-                    b.HasIndex("PollFieldsId");
-
-                    b.ToTable("MembersPollFields");
-                });
-
             modelBuilder.Entity("MembersUsers", b =>
                 {
                     b.Property<int>("MembersId")
@@ -45,6 +30,21 @@ namespace WisePoll.Data.Migrations
                     b.HasIndex("UsersId");
 
                     b.ToTable("MembersUsers");
+                });
+
+            modelBuilder.Entity("PollFieldsUsers", b =>
+                {
+                    b.Property<int>("PollFieldsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PollFieldsId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("PollFieldsUsers");
                 });
 
             modelBuilder.Entity("WisePoll.Data.Models.Members", b =>
@@ -145,26 +145,26 @@ namespace WisePoll.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("MembersPollFields", b =>
-                {
-                    b.HasOne("WisePoll.Data.Models.Members", null)
-                        .WithMany()
-                        .HasForeignKey("MembersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WisePoll.Data.Models.PollFields", null)
-                        .WithMany()
-                        .HasForeignKey("PollFieldsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MembersUsers", b =>
                 {
                     b.HasOne("WisePoll.Data.Models.Members", null)
                         .WithMany()
                         .HasForeignKey("MembersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WisePoll.Data.Models.Users", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PollFieldsUsers", b =>
+                {
+                    b.HasOne("WisePoll.Data.Models.PollFields", null)
+                        .WithMany()
+                        .HasForeignKey("PollFieldsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

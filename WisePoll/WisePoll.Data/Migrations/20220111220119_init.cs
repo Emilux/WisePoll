@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WisePoll.Data.Migrations
 {
-    public partial class fix_foreign_keys : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,29 +26,6 @@ namespace WisePoll.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Members",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PollsId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Members", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Members_Users_UsersId",
-                        column: x => x.UsersId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -79,27 +56,24 @@ namespace WisePoll.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "MembersPolls",
+                name: "Members",
                 columns: table => new
                 {
-                    MembersId = table.Column<int>(type: "int", nullable: false),
-                    PollsId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Email = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PollsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MembersPolls", x => new { x.MembersId, x.PollsId });
+                    table.PrimaryKey("PK_Members", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MembersPolls_Members_MembersId",
-                        column: x => x.MembersId,
-                        principalTable: "Members",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MembersPolls_Polls_PollsId",
+                        name: "FK_Members_Polls_PollsId",
                         column: x => x.PollsId,
                         principalTable: "Polls",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -126,49 +100,74 @@ namespace WisePoll.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "MembersPollFields",
+                name: "MembersUsers",
                 columns: table => new
                 {
                     MembersId = table.Column<int>(type: "int", nullable: false),
-                    PollFieldsId = table.Column<int>(type: "int", nullable: false)
+                    UsersId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MembersPollFields", x => new { x.MembersId, x.PollFieldsId });
+                    table.PrimaryKey("PK_MembersUsers", x => new { x.MembersId, x.UsersId });
                     table.ForeignKey(
-                        name: "FK_MembersPollFields_Members_MembersId",
+                        name: "FK_MembersUsers_Members_MembersId",
                         column: x => x.MembersId,
                         principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MembersPollFields_PollFields_PollFieldsId",
+                        name: "FK_MembersUsers_Users_UsersId",
+                        column: x => x.UsersId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "PollFieldsUsers",
+                columns: table => new
+                {
+                    PollFieldsId = table.Column<int>(type: "int", nullable: false),
+                    UsersId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PollFieldsUsers", x => new { x.PollFieldsId, x.UsersId });
+                    table.ForeignKey(
+                        name: "FK_PollFieldsUsers_PollFields_PollFieldsId",
                         column: x => x.PollFieldsId,
                         principalTable: "PollFields",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PollFieldsUsers_Users_UsersId",
+                        column: x => x.UsersId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Members_UsersId",
+                name: "IX_Members_PollsId",
                 table: "Members",
-                column: "UsersId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MembersPollFields_PollFieldsId",
-                table: "MembersPollFields",
-                column: "PollFieldsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MembersPolls_PollsId",
-                table: "MembersPolls",
                 column: "PollsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MembersUsers_UsersId",
+                table: "MembersUsers",
+                column: "UsersId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PollFields_PollsId",
                 table: "PollFields",
                 column: "PollsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PollFieldsUsers_UsersId",
+                table: "PollFieldsUsers",
+                column: "UsersId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Polls_UsersId",
@@ -179,16 +178,16 @@ namespace WisePoll.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "MembersPollFields");
+                name: "MembersUsers");
 
             migrationBuilder.DropTable(
-                name: "MembersPolls");
-
-            migrationBuilder.DropTable(
-                name: "PollFields");
+                name: "PollFieldsUsers");
 
             migrationBuilder.DropTable(
                 name: "Members");
+
+            migrationBuilder.DropTable(
+                name: "PollFields");
 
             migrationBuilder.DropTable(
                 name: "Polls");

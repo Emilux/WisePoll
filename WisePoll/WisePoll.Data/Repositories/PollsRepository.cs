@@ -25,9 +25,8 @@ namespace WisePoll.Data.Repositories
         {
             return _context.Polls
                 .Include(poll => poll.Members)
-                .ThenInclude(member => member.PollFields)
                 .Include(poll => poll.PollFields)
-                .ThenInclude(pollField => pollField.Members)
+                .ThenInclude(pollField => pollField.Users)
                 .ToListAsync();
         }
         
@@ -35,10 +34,20 @@ namespace WisePoll.Data.Repositories
         {
             return _context.Polls
                 .Include(poll => poll.Members)
-                .ThenInclude(member => member.PollFields)
                 .Include(poll => poll.PollFields)
-                .ThenInclude(pollField => pollField.Members)
+                .ThenInclude(pollField => pollField.Users)
                 .Where(m => m.UsersId == userId)
+                .ToListAsync();
+        }
+        
+        public Task<List<Polls>> GetAllByUserIdAsync(int userId, string orderBy)
+        {
+            return _context.Polls
+                .Include(poll => poll.Members)
+                .Include(poll => poll.PollFields)
+                .ThenInclude(pollField => pollField.Users)
+                .Where(m => m.UsersId == userId)
+                .OrderBy(m => m.Is_active)
                 .ToListAsync();
         }
 
@@ -46,9 +55,8 @@ namespace WisePoll.Data.Repositories
         {
             var polls = await _context.Polls
                 .Include(poll => poll.Members)
-                .ThenInclude(member => member.PollFields)
                 .Include(poll => poll.PollFields)
-                .ThenInclude(pollField => pollField.Members)
+                .ThenInclude(pollField => pollField.Users)
                 .FirstOrDefaultAsync(m => m.Id == id);
             
             if (isDetached)

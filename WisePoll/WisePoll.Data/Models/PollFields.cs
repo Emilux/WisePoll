@@ -7,7 +7,7 @@ namespace WisePoll.Data.Models
     {
         public PollFields()
         {
-            Members = new List<Members>();
+            Users = new List<Users>();
         }
         [Key]
         public int Id { get; set; }
@@ -16,6 +16,6 @@ namespace WisePoll.Data.Models
         [StringLength(255)]
         public string Label { get; set; }
         public int PollsId { get; set; }
-        public List<Members> Members { get; set; }
+        public List<Users> Users { get; set; }
     }
 }
