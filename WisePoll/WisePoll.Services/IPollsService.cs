@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using WisePoll.Data.Models;
 using WisePoll.Services.ViewModels;
 
 namespace WisePoll.Services
@@ -12,5 +13,6 @@ namespace WisePoll.Services
         Task VotePollAsync(CreateVotePollViewModel model);
         Task<VotePollViewModel> GetAsync(int id,bool isDetached = false);
         Task<ResultPollViewModel> GetResultsAsync(int id,bool isDetached = false);
+        Task<Polls> GetIdPollsByUserIdAsync(int id);
     }
 }

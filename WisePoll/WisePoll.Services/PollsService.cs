@@ -155,5 +155,10 @@ namespace WisePoll.Services
 
             return model;
         }
+
+        public async Task<Polls> GetIdPollsByUserIdAsync(int id)
+        {
+            return await _repository.GetIdPollsByUserIdAsync(id);
+        }
     }
 }

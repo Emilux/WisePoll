@@ -29,8 +29,6 @@ namespace WisePoll.Data.Repositories
                 .Include(poll => poll.PollFields)
                 .ThenInclude(pollField => pollField.Members)
                 .ToListAsync();
-
-
         }
         
         public Task<List<Polls>> GetAllByUserIdAsync(int userId)
@@ -98,6 +96,11 @@ namespace WisePoll.Data.Repositories
                 _context.Entry(polls).Property(p).IsModified = true;
             }
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<Polls> GetIdPollsByUserIdAsync(int userId)
+        {
+            return await _context.Polls.OrderByDescending(p => p.Id).FirstOrDefaultAsync(m => m.UsersId == userId);
         }
     }
 }

@@ -1,19 +1,8 @@
-﻿using WisePoll.Services.ViewModels;
-using WisePoll.Data.Repositories;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using WisePoll.Data.Models;
-using Identity.PasswordHasher;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Net.Mail;
 using System.Net;
-using Microsoft.Extensions.Configuration;
+using System.Net.Mail;
+using System.Text;
 
 namespace WisePoll.Services
 {
@@ -44,9 +33,9 @@ namespace WisePoll.Services
             message.BodyEncoding = Encoding.UTF8;
             message.IsBodyHtml = true;
 
-            SmtpClient client = new SmtpClient("smtp.live.com", 25);
-                NetworkCredential basicCredential1 = new
-                    (from, mdpMail);
+            SmtpClient client = new SmtpClient("smtp.live.com", 587);
+            NetworkCredential basicCredential1 = new
+                (from, mdpMail);
 
             client.EnableSsl = true;
             client.UseDefaultCredentials = false;
