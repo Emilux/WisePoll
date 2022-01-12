@@ -68,7 +68,7 @@ namespace WisePoll.Controllers
             return RedirectToAction("Success", "Poll");
         }
 
-
+        [HttpGet]
         [Authorize]
         public async Task<IActionResult> Vote(int id)
         {
@@ -139,6 +139,7 @@ namespace WisePoll.Controllers
             return RedirectToAction("Result", new { id });
         }
 
+        [HttpGet]
         public IActionResult Success()
         {
             var link = TempData["link"] as string;
@@ -154,6 +155,7 @@ namespace WisePoll.Controllers
             return View();
         }
 
+        [HttpGet]
         [Authorize]
         public async Task<IActionResult> Desactivate(int id)
         {
@@ -182,6 +184,7 @@ namespace WisePoll.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
         public async Task<IActionResult> Result(int id)
         {
             if (id == 0)
@@ -196,16 +199,6 @@ namespace WisePoll.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
-            // Check if current connected user have already participated to the poll or the poll is active
-            if (data.PollFields.All(p => p.Users.All(u => u.Email != User.FindFirstValue(ClaimTypes.Email))) && data.Is_active)
-            {
-                return RedirectToAction("Index", "Home");    
-            }
-
-            // Check if current connected user is part of the poll
-            if (data.Members.All(m => m.Email != User.FindFirstValue(ClaimTypes.Email)))
-                return RedirectToAction("Index", "Home");
 
             return View(data);
 
