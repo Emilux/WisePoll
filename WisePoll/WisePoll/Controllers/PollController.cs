@@ -34,11 +34,20 @@ namespace WisePoll.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreatePollViewModel model)
         {
-
+    
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
+            
+            // Check if user email is in the participant members
+            var members = model.Members.Split(",", StringSplitOptions.TrimEntries);
+            if (members.Any(m => m == User.FindFirstValue(ClaimTypes.Email)))
+            {
+                ModelState.AddModelError("Members","You can't use your email as poll participant email");
+                return View(model);
+            }
+            
             await _pollsService.CreatePollAsync(model);
 
             //  PollsId and User.Pseudo

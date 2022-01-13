@@ -14,7 +14,7 @@
     </div>
     @if (Model.Count() == 0)
     {
-        <div class="text-center mt-5"><i class="font-italic">You haven't created any polls yet...</i></div>
+        <div class="text-center mt-5"><i class="font-italic">You haven't created any poll yet...</i></div>
         <div class="">
             <a class="btn btn-primary btn-icon ml-auto mr-auto" asp-area="" asp-controller="Poll" asp-action="Create"><i class="icon-PlusIcon"></i>Let's create a poll</a>
         </div>
@@ -30,7 +30,7 @@
                 <a class="poll-list-item-actions-link link" asp-controller="Poll" asp-action="@(p.Is_active ? "Vote" : "Result")" asp-route-id="@p.Id">View @(p.Is_active ? string.Empty : "Results")</a>
                 @if (p.Is_active)
                 {
-                    <a  class="poll-list-item-actions-link btn btn-primary" asp-controller="Poll" asp-action="Desactivate" asp-route-id="@p.Id" >End the poll</a>                }
+                    <a  class="poll-list-item-actions-link btn btn-primary" asp-controller="Poll" asp-action="Desactivate" asp-route-id="@p.Id" >End the poll</a> }
                 else
                 {
                     <a  class="poll-list-item-actions-link btn btn-primary" href="#" disabled="true" >End the poll</a>

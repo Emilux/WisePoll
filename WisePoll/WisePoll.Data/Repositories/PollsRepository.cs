@@ -39,6 +39,7 @@ namespace WisePoll.Data.Repositories
                 .ThenInclude(pollField => pollField.Users)
                 .Where(m => m.UsersId == userId)
                 .OrderByDescending(m => m.Is_active)
+                .ThenByDescending(m => m.Id)
                 .ToListAsync();
         }
 
